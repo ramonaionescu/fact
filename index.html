@@ -1,53 +1,71 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="An offline-capable, browser-based authoring tool for factorial scenarios. Define dimensions, choose levels, and export your work.">
-<meta name="color-scheme" content="light">
-<title>Factorial | Scenario builder</title>
-<style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Author factorial vignettes with reusable wording fields, master scripts, and multi-turn conversations. Browser-local saving; no accounts."><meta name="color-scheme" content="light"><title>Factorial | Master script builder</title><style>
 :root{--ink:#172335;--muted:#586577;--line:#dde3eb;--paper:#fff;--bg:#f5f7fa;--accent:#4c48bd;--accent-soft:#f0efff;--green:#176853;--green-soft:#eaf7f0;--danger:#ab3333;--warning:#fff5df;--radius:14px;--shadow:0 5px 20px #17233506}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button,a,input,textarea,select{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.48}a{color:var(--accent)}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #827be8;outline-offset:3px}input,textarea,select{width:100%;padding:11px 12px;border:1px solid #cbd3df;border-radius:8px;background:#fff;color:var(--ink);min-width:0}input[type=number]{max-width:120px}textarea{resize:vertical;min-height:78px;line-height:1.5}label{display:block;font-weight:600;font-size:13px;line-height:1.5;margin-bottom:7px}input::placeholder,textarea::placeholder{color:#8290a2;font-weight:400}input:focus,textarea:focus,select:focus{border-color:var(--accent)}[hidden]{display:none!important}h1,h2,h3,p{margin-top:0}h1{font-size:34px;line-height:1.2;letter-spacing:-1px;margin-bottom:12px}h2{font-size:21px;letter-spacing:-.4px;line-height:1.3}h3{font-size:16px;line-height:1.4}p{margin-bottom:14px}.muted,.help{color:var(--muted)}.help{font-size:12px;line-height:1.6;margin:6px 0 0}.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}.wrap{max-width:1180px;margin:auto;padding:0 32px}.topbar{background:#fff;border-bottom:1px solid var(--line)}.topbar-inner{min-height:86px;display:flex;justify-content:space-between;align-items:center;gap:20px}.brand{display:flex;align-items:center;gap:12px}.brandmark{display:grid;grid-template-columns:repeat(2,9px);gap:4px;padding:11px;background:var(--accent);border-radius:12px;flex:none}.brandmark i{height:9px;background:#fff;border-radius:2px}.brandmark i:last-child{opacity:.4}.brand-title{font-size:22px;line-height:1.1;letter-spacing:-.6px;font-weight:750}.brand-sub{font-size:10px;letter-spacing:1.7px;color:var(--muted);margin-top:5px}.toolbar,.actions,.inline{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.toolbar{justify-content:flex-end}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 15px;min-height:42px;border-radius:8px;border:1px solid #cdd5df;background:#fff;color:var(--ink);font-size:13px;font-weight:650;line-height:1.35;white-space:normal;text-decoration:none}.btn:hover:not(:disabled){background:#f3f5fa}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.primary:hover:not(:disabled){background:#3c389f}.btn.soft{background:var(--accent-soft);border-color:#dcd9fc;color:#403ca0}.btn.ghost{border-color:transparent;background:transparent}.btn.danger{color:var(--danger)}.btn.small{min-height:32px;font-size:12px;padding:7px 10px}.status{font-size:11px;color:var(--green);display:flex;align-items:center;gap:6px}.status:before{content:"";width:6px;height:6px;background:currentColor;border-radius:50%}.status.warn{color:#94631e}.status.error{color:var(--danger)}.local-note{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:12px;color:var(--muted);margin:22px 0}.local-note strong{color:var(--ink)}.local-note button{flex:none;max-width:110px;text-align:right;padding:0;border:0;background:none;color:var(--accent);font-size:12px}.steps{display:flex;border-bottom:1px solid var(--line);margin:0 0 32px;gap:32px}.step{display:flex;align-items:center;gap:11px;padding:14px 0 18px;border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:-1px}.step .stepnum{width:28px;height:28px;border-radius:50%;background:#e8ecf2;color:var(--muted);font-size:12px;display:grid;place-items:center}.step[aria-current=step]{color:var(--accent);border-bottom-color:var(--accent)}.step[aria-current=step] .stepnum{background:var(--accent);color:#fff}.count-pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:1px 7px;background:#fff;color:var(--muted)}.heading-row{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:28px}.heading-row .muted{max-width:620px;margin-bottom:0}.mini-stats{display:flex;gap:24px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 22px;flex:none;align-items:center}.mini-stats>div+div{border-left:1px solid var(--line);padding-left:24px}.stat-value{font-size:25px;line-height:1.2;font-weight:700;letter-spacing:-.5px;overflow-wrap:anywhere;max-width:230px}.stat-label{font-size:11px;color:var(--muted);margin-top:3px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.panel-pad{padding:26px}.settings-panel{margin-bottom:24px}.settings-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end}.number-control{display:flex;align-items:center;gap:8px}.number-control input{width:82px}.optional-section{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}.optional-section summary{font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}.optional-section[open] summary{margin-bottom:18px}.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.span-full{grid-column:1/-1}.dimension-card{margin-bottom:20px;overflow:hidden}.dimension-head{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:16px 24px;background:#fafbfe;border-bottom:1px solid var(--line)}.dimension-title{display:flex;gap:10px;align-items:center;min-width:0}.dim-number{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px}.dimension-title h3{margin:0;overflow-wrap:anywhere}.dimension-body{padding:24px}.level-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}.level-top h3{margin:0 0 3px;font-size:14px}.level-count-label{margin:0;font-size:12px;white-space:nowrap}.level-header,.level-row{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1.6fr);gap:12px;align-items:start}.level-header{margin:16px 0 7px;font-size:11px;color:var(--muted);font-weight:600}.level-row{margin-top:10px}.level-row textarea{min-height:46px;height:46px;font-size:13px;padding:11px}.level-row input{font-size:13px}.level-index{padding-top:13px;font-size:11px;color:#7b8797;text-align:center}.setup-bottom{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:22px 0 38px}.error-box{border:1px solid #efb5b5;background:#fff1f1;padding:16px 20px;border-radius:10px;color:#842727;font-size:13px;margin:0 0 20px}.error-box p{margin:0}.error-box ul{margin:7px 0 0;padding-left:20px}.warning-banner{padding:16px 18px;background:var(--warning);border:1px solid #ecd396;border-radius:10px;font-size:13px;margin:18px 0;color:#735217}.warning-banner p{margin:0 0 8px}.builder-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:26px;align-items:start}.choice-card{margin-bottom:18px;padding:22px 24px}.choice-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.choice-title h3{margin:0}.choice-number{font-size:10px;color:var(--accent);letter-spacing:1px;font-weight:700;margin-bottom:4px}.phrase{font-size:16px;margin-bottom:17px;white-space:pre-wrap;overflow-wrap:anywhere}.level-option{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:13px;margin:9px 0 0;cursor:pointer;font-weight:400;font-size:13px;background:#fff;transition:border-color .1s,background .1s}.level-option:has(input:checked){border-color:var(--accent);background:#f6f5ff;box-shadow:0 0 0 1px var(--accent)}.level-option input{width:16px;height:16px;max-width:none;accent-color:var(--accent);margin:4px 0 0;flex:none}.option-label{font-weight:650;display:block;overflow-wrap:anywhere}.option-text{display:block;color:var(--muted);font-size:13px;margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere}.preview-wrap{position:sticky;top:24px}.preview-card{overflow:hidden}.preview-top{padding:18px 24px;display:flex;justify-content:space-between;gap:14px;align-items:center;border-bottom:1px solid var(--line)}.preview-top h2{font-size:16px;margin:0}.progress-chip{border-radius:20px;padding:4px 9px;background:#f0f2f7;color:var(--muted);font-size:11px;white-space:nowrap}.progress-chip.complete{color:var(--green);background:var(--green-soft)}.preview-document{padding:28px;min-height:230px;max-height:550px;overflow:auto;background:linear-gradient(150deg,#fff 50%,#fafafd)}.document-label{font-size:10px;color:#8a879a;letter-spacing:1.4px;font-weight:650;margin-bottom:16px}.scenario-prose{font:18px/1.9 Georgia,"Times New Roman",serif;white-space:pre-wrap;overflow-wrap:anywhere}.scenario-prose.placeholder{font:14px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#748094}.preview-footer{padding:22px 24px;border-top:1px solid var(--line);background:#fbfcfe}.preview-footer input,.preview-footer textarea{font-size:13px}.preview-footer textarea{min-height:64px}.preview-field{margin-bottom:14px}.save-button{width:100%;margin-top:4px}.duplicate-note{color:#805b20;font-size:12px;margin:8px 0 0}.builder-under{padding:13px 2px;color:var(--muted);font-size:12px}.library{margin:38px 0 44px;padding-top:30px;border-top:1px solid var(--line)}.library-heading{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:20px}.library-heading h2{margin-bottom:5px}.library-heading p{margin:0;font-size:13px;color:var(--muted)}.library-search{max-width:340px;font-size:13px;margin-bottom:18px}.empty{padding:38px;text-align:center;background:#fff;border:1px dashed #cbd3df;border-radius:12px}.empty h3{margin-bottom:6px}.empty p{color:var(--muted);font-size:13px;max-width:390px;margin:0 auto}.saved-card{margin-bottom:12px;padding:20px 22px}.saved-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.saved-title{margin:0;font-size:15px;overflow-wrap:anywhere}.saved-meta{font-size:11px;color:var(--muted);margin-top:5px}.saved-chips{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0}.saved-chip{font-size:11px;color:#526174;background:#f2f4f8;padding:4px 8px;border-radius:5px;max-width:100%;overflow-wrap:anywhere}.saved-text{font-size:14px;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;border-left:3px solid #dfdcf9;padding-left:15px;margin:15px 0 5px}.saved-notes{color:var(--muted);font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:13px}.saved-id{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:10px;color:var(--muted);margin-top:15px;overflow-wrap:anywhere}.saved-card summary{font-size:12px;color:var(--accent);cursor:pointer}.saved-actions{flex:none}.footer{display:flex;justify-content:space-between;align-items:center;gap:15px;border-top:1px solid var(--line);padding:22px 0 32px;color:var(--muted);font-size:11px}.footer button{font-size:11px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1d2b3f;color:#fff;border-radius:10px;box-shadow:0 8px 30px #0002;padding:13px 20px;max-width:min(600px,calc(100vw - 32px));font-size:13px;z-index:100}.toast.error{background:#8c3030}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.help-dialog{border:1px solid var(--line);border-radius:16px;max-width:620px;width:calc(100vw - 36px);padding:28px;color:var(--ink);box-shadow:0 20px 70px #0003}.help-dialog::backdrop{background:#17233577}.help-dialog h2{margin-bottom:16px}.help-dialog p{font-size:14px}.help-dialog .actions{justify-content:flex-end;margin-top:20px}.help-dialog code{font-size:12px;background:#f2f3f8;padding:2px 4px;border-radius:3px}.help-dialog a{overflow-wrap:anywhere}fieldset{border:0;margin:0;padding:0;min-width:0}legend{padding:0;width:100%}.layout-field{max-width:310px}
 @media(max-width:960px){.heading-row{display:block}.mini-stats{display:inline-flex;margin-top:20px}.topbar-inner{align-items:flex-start;padding-top:19px;padding-bottom:19px}.toolbar{max-width:340px}.status{width:100%;justify-content:flex-end}.builder-grid{gap:18px}.preview-document{padding:22px}.preview-wrap{top:15px}.saved-head{flex-wrap:wrap}}
 @media(max-width:740px){.wrap{padding:0 18px}.topbar-inner{display:block;padding-top:18px;padding-bottom:18px}.toolbar{max-width:none;justify-content:flex-start;margin-top:17px}.status{width:auto;justify-content:flex-start;order:3}.brand-title{font-size:21px}.btn{font-size:12px;padding:10px 12px}.local-note{font-size:11px;align-items:flex-start}.steps{gap:22px;margin-bottom:25px}.step{font-size:12px;gap:8px}h1{font-size:29px}.heading-row{margin-bottom:22px}.mini-stats{padding:12px 18px;gap:20px}.stat-value{font-size:23px;max-width:150px}.panel-pad,.dimension-body{padding:20px}.settings-grid,.grid-two{grid-template-columns:1fr;gap:18px}.dimension-head{padding:14px 18px}.dimension-title{display:block}.dim-number{display:block;margin-bottom:3px}.level-header{display:none}.level-row{grid-template-columns:23px 1fr;gap:8px;margin-top:17px}.level-row textarea{grid-column:2;height:62px}.level-top{display:block}.level-top .number-control{margin-top:12px}.level-index{grid-row:1/3}.builder-grid{grid-template-columns:1fr}.preview-wrap{position:static}.choice-card{padding:20px}.library-heading{display:block}.library-heading .actions{margin-top:15px}.saved-card{padding:18px}.saved-actions{width:100%}.footer{align-items:flex-start}.preview-document{max-height:none}.setup-bottom{align-items:stretch;flex-direction:column}.setup-bottom .actions{justify-content:space-between}.library-search{max-width:none}}
 @media print{.topbar,.local-note,.steps,.heading-row,#setup-page,.builder-grid,.library-heading .actions,.library-search,.saved-actions,.saved-card summary,.footer,.toast,#storage-warning,#load-more{display:none!important}.wrap{max-width:none;padding:0}body{background:#fff}#build-page{display:block!important}.library{margin:0;padding:0;border:0}.saved-card{break-inside:avoid;box-shadow:none}details>div{display:block!important}.saved-card details{display:block}}
-</style>
-</head>
+/* v2: preserve the original visual language; extend it to script authoring. */
+.version-tag{font-size:11px;background:var(--accent-soft);color:var(--accent);padding:3px 6px;border-radius:5px;vertical-align:middle;letter-spacing:0}
+.setup-explainer{display:flex;gap:14px;margin-top:23px;padding:18px 20px;background:#f5f4ff;border:1px solid #e8e5fc;border-radius:10px}.setup-explainer p{font-size:13px;color:var(--muted);margin:0;line-height:1.7}.setup-explainer strong{color:var(--ink)}.explain-icon{font:bold 20px/1.5 monospace;color:var(--accent);flex:none}
+.key-row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:7px}.key-row code,.field-token{color:var(--accent);font-size:11px;overflow-wrap:anywhere;white-space:normal}.key-row .btn{padding:3px 7px;min-height:26px}.dimension-card.master .dimension-body{padding-bottom:0}.dimension-card.master .level-top{margin-top:19px;padding-top:17px}.level-name-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0 22px;max-height:320px;overflow:auto}.level-name-grid input{font-size:13px}.level-name-grid label{font-size:11px;color:var(--muted)}.field-intro{display:flex;justify-content:space-between;gap:14px;align-items:start;margin-bottom:12px}.field-intro h3{margin-bottom:3px}.field-intro .help{max-width:620px}.field-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px;margin-bottom:16px;max-height:760px;scrollbar-width:thin}.field-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;min-width:600px}.field-table thead th{font-size:12px;text-align:left;background:#f8f9fd;padding:13px 15px;position:sticky;top:0;z-index:2;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.field-table th.field-col{width:220px}.field-table td,.field-table tbody th{vertical-align:top;text-align:left;padding:16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-weight:400}.field-table tr:last-child td,.field-table tr:last-child th{border-bottom:0}.field-table td:last-child{border-right:0}.field-table td{width:240px}.field-table textarea{min-height:108px;font-size:13px;line-height:1.55}.field-name{font-size:12px;padding:8px 9px;font-weight:600}.field-token{display:block;line-height:1.6;margin-top:9px}.field-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px}.field-actions .btn{font-size:10px;padding:4px 0;min-height:24px}.check-label{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:400;margin:9px 0 0;color:var(--muted);cursor:pointer}.check-label input{width:14px;height:14px;flex:none;padding:0;margin:0;accent-color:var(--accent)}.field-footer{padding-bottom:23px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}.field-footer .help{margin:0}.script-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:26px;align-items:start}.script-main{min-width:0}.script-overview{display:flex;gap:12px;align-items:center;margin-bottom:16px}.script-overview .help{margin:0}.script-block{margin-bottom:18px;overflow:hidden}.block-head{padding:13px 18px;border-bottom:1px solid var(--line);background:#fafbfe;display:flex;justify-content:space-between;align-items:center;gap:8px}.block-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:var(--muted)}.block-body{padding:19px 22px}.block-body label{font-size:12px}.block-body input{font-size:13px}.block-body textarea{font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;min-height:128px;tab-size:2}.block-body textarea:focus{box-shadow:0 0 0 3px var(--accent-soft)}.block-field{margin-bottom:14px}.block-field:last-child{margin:0}.block-add{margin:20px 0}.script-bottom{margin:22px 0 38px}.token-sidebar{position:sticky;top:20px}.token-panel{overflow:hidden}.token-heading{padding:22px;border-bottom:1px solid var(--line)}.token-heading h2{font-size:18px;margin-bottom:9px}.token-group{padding:16px 18px;border-bottom:1px solid var(--line)}.token-group summary{cursor:pointer;font-weight:650;font-size:13px;overflow-wrap:anywhere}.token-group .help{font-size:11px}.token-list{display:grid;gap:7px;margin-top:12px}.token-btn{display:block;width:100%;text-align:left;padding:9px 10px;background:#fafafe;border:1px solid #e6e4f4;border-radius:7px;color:var(--ink);line-height:1.5}.token-btn:hover{background:var(--accent-soft);border-color:#bfb9ed}.token-btn span{display:block;font-size:12px;font-weight:550}.token-btn code{display:block;font-size:10px;overflow-wrap:anywhere;color:var(--accent);margin-top:3px}.token-note{padding:19px 22px;background:#fafbfe;font-size:12px;color:var(--muted)}.token-note code{font-size:11px;overflow-wrap:anywhere}.audit-panel{border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:#fff;font-size:13px}.audit-panel.good{border-color:#cce5d8;background:#f5fbf7}.audit-panel.bad{border-color:#efb5b5;background:#fff6f6}.audit-panel.warn{background:#fffbf1;border-color:#ecd396}.audit-title{font-weight:650;margin:0 0 4px}.audit-panel ul{margin:10px 0 0;padding-left:19px;color:var(--muted)}.audit-panel li{margin-top:6px}.audit-panel .audit-error{color:var(--danger)}.block-head .actions{gap:3px}.block-head .btn{font-size:11px;min-height:28px;padding:5px 7px}.preview-tools{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:13px 24px;border-bottom:1px solid #eef0f5;background:#fdfdff}.preview-tools .document-label,.preview-tools .check-label{margin:0}.preview-tools .document-label{font-size:9px;letter-spacing:1px}.preview-document{max-height:660px;padding:25px}.script-document{font:16px/1.85 Georgia,"Times New Roman",serif;overflow-wrap:anywhere}.script-section+.script-section{margin-top:22px}.script-section-title{font:700 11px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:1.1px;text-transform:uppercase;margin:0 0 10px;color:var(--muted)}.script-body{white-space:pre-wrap;margin:0}.dialogue-turn{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;padding:15px 0;border-top:1px solid #e8eaf1;font-size:15px;line-height:1.75}.dialogue-speaker{font:650 11px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-top:4px;color:var(--accent);white-space:pre-wrap}.dialogue-turn:first-child{border-top:0}.dialogue-text{white-space:pre-wrap}.variable{padding:1px 2px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:inherit}.tone-0{background:#eae6fc}.tone-1{background:#dff3ee}.tone-2{background:#fff0ce}.tone-3{background:#f9e1eb}.tone-4{background:#dfeefb}.tone-5{background:#f4e8d9}.tone-6{background:#e8efd7}.tone-7{background:#e7e9fa}.script-document.clean .variable{padding:0;background:transparent}.missing-variable{font:12px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#78642a;border:1px dashed #d7c891;border-radius:3px;padding:1px 4px}.choice-wording{margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}.choice-wording summary{font-size:12px;color:var(--muted);cursor:pointer}.choice-wording dl{margin:13px 0 0;font-size:12px}.choice-wording dt{font-weight:650;margin:10px 0 3px}.choice-wording dd{margin:0;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}.choice-description{font-size:12px;color:var(--muted);margin:0 0 14px}.choice-card .option-text{font-size:12px}.script-stamp{font:11px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);padding:0 0 20px}.rename-error{font-size:13px;color:var(--danger);margin-top:12px}.saved-card .script-document{margin:18px 0;border:1px solid var(--line);border-radius:9px;padding:24px;max-width:850px}
+@media(min-width:1100px){.builder-grid{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)}}
+@media(max-width:950px){.script-grid{grid-template-columns:minmax(0,1fr) 260px;gap:18px}.token-heading,.token-note{padding:17px}.field-table th.field-col{width:190px}.heading-row{gap:16px}.preview-tools{padding:12px 20px}.builder-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:720px){.steps{gap:18px}.step{font-size:12px;gap:7px}.step .stepnum{width:24px;height:24px}.step .count-pill{display:none}.script-grid{display:flex;flex-direction:column}.token-sidebar{position:static;width:100%;order:-1}.token-panel{max-height:310px;overflow:auto}.token-note{display:none}.token-heading{padding:16px}.token-heading .eyebrow{display:none}.token-heading h2{margin:0 0 4px;font-size:15px}.token-group{padding:12px 16px}.token-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.script-main{width:100%}.script-block .block-head{padding:11px 12px;align-items:flex-start}.block-label{font-size:10px;padding-top:4px}.block-body{padding:16px}.block-head .actions{gap:0;justify-content:flex-end}.block-head .btn{font-size:10px;padding:5px 6px}.field-intro{display:block}.dimension-card.master .dimension-body{padding:18px 16px 0}.setup-explainer{padding:15px}.field-table{min-width:650px}.field-table th.field-col{width:190px}.field-table td,.field-table tbody th{padding:13px}.preview-document{padding:22px 19px;max-height:650px}.dialogue-turn{grid-template-columns:60px minmax(0,1fr);gap:11px}.heading-row .actions{gap:7px}.script-document{font-size:16px}.library-heading .actions{width:100%}.library-heading .btn{flex:1}.level-top{flex-wrap:wrap}.level-top .number-control{margin-left:auto}.script-overview{align-items:start}.field-footer .help{max-width:100%}}
+@media(max-width:420px){.steps{gap:10px;justify-content:space-between}.step{font-size:11px;gap:5px}.step .stepnum{width:22px;height:22px}.dialogue-turn{grid-template-columns:52px minmax(0,1fr)}.preview-tools{padding:12px 19px}.token-list{grid-template-columns:1fr}.block-label{letter-spacing:.5px}.block-head .btn{padding:5px}.library-heading .actions{gap:6px}.library-heading .btn{font-size:11px;padding:9px 7px}}
+@media(min-width:721px){.token-panel{max-height:calc(100vh - 40px);overflow:auto;scrollbar-width:thin}}
+.token-btn .token-uses{display:inline;float:right;font-size:10px;font-weight:400;color:var(--muted);margin-left:5px}
+/* Keep visually hidden matrix labels inside the matrix's scroll/clipping context. */
+.field-table-wrap{position:relative}.dimension-body{position:relative}
+</style></head>
 <body>
 <noscript><div class="wrap warning-banner">JavaScript is required to build and save scenarios. Open this file in a browser with JavaScript enabled.</div></noscript>
 <header class="topbar"><div class="wrap topbar-inner">
-  <div class="brand"><div class="brandmark" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div><div class="brand-title">Factorial</div><div class="brand-sub">SCENARIO BUILDER</div></div></div>
+  <div class="brand"><div class="brandmark" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div><div class="brand-title">Factorial <span class="version-tag">2</span></div><div class="brand-sub">SCENARIO BUILDER</div></div></div>
   <div class="toolbar"><span id="save-status" class="status" role="status">Ready to start</span><button class="btn" id="import-project">Import project</button><button class="btn soft" id="export-project">Export project</button></div>
 </div></header>
 <main class="wrap">
-<div class="local-note"><span><strong>A local workspace.</strong> No account needed. Export a project backup to keep a portable copy.</span><button id="open-help">How saving works</button></div>
+<div class="local-note"><span><strong>A local workspace.</strong> Your wording stays in this browser. Export a project backup to keep a portable copy.</span><button id="open-help">How it works</button></div>
 <div id="storage-warning" class="warning-banner" role="alert" hidden></div>
 <nav class="steps" aria-label="Builder steps">
   <button id="step-setup" class="step" aria-current="step"><span class="stepnum">1</span>Design setup</button>
-  <button id="step-build" class="step"><span class="stepnum">2</span>Build &amp; save<span id="nav-count" class="count-pill">0</span></button>
+  <button id="step-script" class="step"><span class="stepnum">2</span>Master script</button>
+  <button id="step-build" class="step"><span class="stepnum">3</span>Build &amp; save<span id="nav-count" class="count-pill">0</span></button>
 </nav>
 <section id="setup-page" aria-labelledby="setup-heading">
-  <div class="heading-row"><div><div class="eyebrow">Step 1 / Define</div><h1 id="setup-heading" tabindex="-1">Define your design.</h1><p class="muted">Add your dimensions, the phrase before each one, and its levels. Then choose one level per dimension to compose a scenario.</p></div><div class="mini-stats" aria-label="Design summary"><div><div class="stat-value" id="dim-stat">2</div><div class="stat-label">dimensions</div></div><div><div class="stat-value" id="combo-stat">4</div><div class="stat-label">possible combinations</div></div></div></div>
+  <div class="heading-row"><div><div class="eyebrow">Step 1 / Define</div><h1 id="setup-heading" tabindex="-1">One choice. Many expressions.</h1><p class="muted">Define your dimensions and levels. Give each level several pieces of wording, then weave them into instructions and dialogue.</p></div><div class="mini-stats" aria-label="Design summary"><div><div class="stat-value" id="dim-stat">2</div><div class="stat-label">dimensions</div></div><div><div class="stat-value" id="combo-stat">4</div><div class="stat-label">possible combinations</div></div></div></div>
   <div class="panel panel-pad settings-panel">
-    <div class="settings-grid"><div><label for="project-name">Project name</label><input id="project-name" maxlength="200" placeholder="e.g. Assistant interaction study"></div><div><label for="dimension-count">Number of dimensions</label><div class="number-control"><input id="dimension-count" type="number" min="1" max="30" step="1" value="2"><button class="btn" id="apply-dimensions">Apply</button></div></div></div>
-    <details class="optional-section"><summary>Optional: shared introduction, ending, and paragraph layout</summary><div class="grid-two"><div><label for="intro">Text before the whole scenario</label><textarea id="intro" maxlength="20000" placeholder="Imagine that ..."></textarea></div><div><label for="outro">Text after the whole scenario</label><textarea id="outro" maxlength="20000" placeholder="Optional final sentence or question"></textarea></div><div class="span-full layout-field"><label for="layout">Scenario layout</label><select id="layout"><option value="single">One paragraph</option><option value="paragraphs">A paragraph for each dimension</option></select></div></div></details>
+    <div class="settings-grid"><div><label for="project-name">Project name</label><input id="project-name" maxlength="200" placeholder="e.g. Human and chatbot emotion"></div><div><label for="dimension-count">Number of dimensions</label><div class="number-control"><input id="dimension-count" type="number" min="1" max="30" step="1" value="2"><button class="btn" id="apply-dimensions">Apply</button></div></div></div>
+    <div class="setup-explainer" id="master-explainer"><span class="explain-icon" aria-hidden="true">{ }</span><p><strong>A wording field is a reusable piece of a manipulation.</strong><br>For example, add <em>Emotional state</em>, <em>Explanation</em>, and <em>Opening line</em> to Human emotion. Write each field for both Happy and Sad. Selecting a level will update every linked phrase in your script.</p></div>
+    <details class="optional-section" id="simple-settings" hidden><summary>Original layout: shared introduction, ending, and paragraphs</summary><div class="grid-two"><div><label for="intro">Text before the whole scenario</label><textarea id="intro" maxlength="20000" placeholder="Imagine that ..."></textarea></div><div><label for="outro">Text after the whole scenario</label><textarea id="outro" maxlength="20000" placeholder="Optional final sentence or question"></textarea></div><div class="span-full layout-field"><label for="layout">Scenario layout</label><select id="layout"><option value="single">One paragraph</option><option value="paragraphs">A paragraph for each dimension</option></select></div></div></details>
+    <div id="legacy-notice" class="help" hidden>Your original phrase-based layout is preserved. Open <strong>Master script</strong> to convert it to reusable wording fields.</div>
   </div>
   <div id="setup-errors" class="error-box" role="alert" hidden></div>
   <div id="dimensions"></div>
-  <div class="setup-bottom"><div class="actions"><button class="btn" id="add-dimension">+ Add dimension</button><button class="btn ghost" id="load-example">Load a small example</button></div><button class="btn primary" id="continue">Continue to scenarios &rarr;</button></div>
-  <p class="help" style="margin-top:-15px;margin-bottom:30px">The example is illustrative, not taken from your manuscript. Dimension names are labels; only phrases and selected level wording appear in the scenario. Include your own punctuation.</p>
+  <div class="setup-bottom"><div class="actions"><button class="btn" id="add-dimension">+ Add dimension</button><button class="btn ghost" id="load-example">Load 2 &times; 2 example</button></div><button class="btn primary" id="continue">Continue to master script &rarr;</button></div>
+  <p class="help" style="margin-top:-15px;margin-bottom:30px">Example wording is illustrative, not transcribed from your appendix or a validated manipulation. More wording fields do not add experimental conditions.</p>
+</section>
+<section id="script-page" aria-labelledby="script-heading" hidden>
+  <div class="heading-row"><div><div class="eyebrow">Step 2 / Write</div><h1 id="script-heading" tabindex="-1">Thread your wording together.</h1><p class="muted">Write the fixed parts once. Insert wording fields wherever a manipulation belongs&mdash;even several times within the same sentence or across conversation turns.</p></div><div class="actions"><button class="btn" id="script-back">Edit dimensions</button><button class="btn primary" id="script-continue">Build a scenario &rarr;</button></div></div>
+  <div id="simple-script-panel" class="panel panel-pad settings-panel" hidden><div class="eyebrow">Original layout</div><h2>Your existing phrase-based script is preserved.</h2><p class="muted">It still combines the introduction, each dimension's phrase and selected wording, and the ending. Convert a copy of this layout into a master script to place several wording fields anywhere.</p><div class="actions"><button class="btn primary" id="convert-master">Convert to master script</button><button class="btn" id="skip-script">Use original layout &rarr;</button></div><p class="help">Conversion changes only the editable setup. Saved scenarios keep their original design and text.</p></div>
+  <div id="master-script-panel">
+    <div class="script-grid"><div class="script-main"><div class="script-overview"><span id="block-count" class="count-pill">1 block</span><span class="help">Blocks appear in this order in the final vignette.</span></div><div id="script-blocks"></div><div class="block-add actions"><button class="btn" id="add-text">+ Instruction / text block</button><button class="btn" id="add-turn">+ Conversation turn</button></div><div id="script-audit" class="audit-panel" role="status" aria-live="polite"></div><div class="script-bottom actions"><button class="btn primary" id="script-build-bottom">Continue to scenarios &rarr;</button></div></div>
+    <aside class="token-sidebar" aria-label="Available wording fields"><div class="panel token-panel"><div class="token-heading"><div class="eyebrow">Insert a placeholder</div><h2>Your wording fields</h2><p class="help">Place your cursor in a script box, then click a field below. Reuse it as often as you need.</p></div><div id="token-library"></div><div class="token-note"><strong>One selection controls every placement.</strong><p class="help">A placeholder such as <code>{{human_emotion.state}}</code> is replaced by that field's wording for the selected level. The <code>label</code> field inserts the level name itself.</p><p class="help">Text outside placeholders stays fixed. Placeholders do not execute code or evaluate conditions. Wording inside a field is inserted as literal text, not another template.</p></div></div></aside></div>
+  </div>
 </section>
 <section id="build-page" aria-labelledby="build-heading" hidden>
-  <div class="heading-row"><div><div class="eyebrow">Step 2 / Compose</div><h1 id="build-heading" tabindex="-1">Build a scenario.</h1><p class="muted" id="build-subtitle">Choose one level for every dimension. Your complete scenario will appear alongside your choices.</p></div><div class="actions"><button class="btn" id="back-setup">Edit design</button><button class="btn" id="new-scenario">New scenario</button></div></div>
-  <div class="builder-grid"><div id="choices"></div><aside class="preview-wrap" aria-label="Scenario preview and save"><div class="panel preview-card"><div class="preview-top"><h2>Scenario preview</h2><span class="progress-chip" id="selection-progress">0 / 2 selected</span></div><div class="preview-document"><div class="document-label">COMPOSED FROM YOUR EXACT WORDING</div><div id="scenario-preview" class="scenario-prose placeholder" aria-live="polite">Choose a level for each dimension to complete your scenario.</div></div><div class="preview-footer"><div class="preview-field"><label for="scenario-name">Scenario name <span class="muted">(optional)</span></label><input id="scenario-name" maxlength="200" placeholder="Scenario 001"></div><div class="preview-field"><label for="scenario-notes">Research notes <span class="muted">(not part of the scenario)</span></label><textarea id="scenario-notes" maxlength="20000" placeholder="Optional notes about this combination"></textarea></div><div class="actions"><button class="btn small" id="copy-preview" disabled>Copy text</button><span class="help" id="condition-code" style="margin:0"></span></div><p id="duplicate-note" class="duplicate-note" hidden></p><button class="btn primary save-button" id="save-scenario" disabled>Save scenario</button><p class="help" id="save-hint">Select one level in every dimension to save.</p></div></div><div class="builder-under">Saved scenarios keep their original wording, even when you edit the design later.</div></aside></div>
+  <div class="heading-row"><div><div class="eyebrow">Step 3 / Compose</div><h1 id="build-heading" tabindex="-1">See the whole scenario.</h1><p class="muted" id="build-subtitle">Choose one level per dimension. Every linked piece of wording updates together.</p></div><div class="actions"><button class="btn" id="back-setup">Edit design</button><button class="btn" id="back-script">Edit script</button><button class="btn" id="new-scenario">New scenario</button></div></div>
+  <div id="build-warnings" class="warning-banner" hidden></div>
+  <div class="builder-grid"><div id="choices"></div><aside class="preview-wrap" aria-label="Scenario preview and save"><div class="panel preview-card"><div class="preview-top"><h2>Scenario preview</h2><span class="progress-chip" id="selection-progress">0 / 2 selected</span></div><div class="preview-tools"><span class="document-label">INSTRUCTIONS + CONVERSATION</span><label class="check-label"><input type="checkbox" id="highlight-toggle" checked>Highlight variable text</label></div><div class="preview-document"><div id="scenario-preview" class="script-document" aria-live="polite">Choose a level for each dimension to complete your scenario.</div></div><div class="preview-footer"><div class="preview-field"><label for="scenario-name">Scenario name <span class="muted">(optional)</span></label><input id="scenario-name" maxlength="200" placeholder="Scenario 001"></div><div class="preview-field"><label for="scenario-notes">Research notes <span class="muted">(not part of the scenario)</span></label><textarea id="scenario-notes" maxlength="20000" placeholder="Optional notes about this combination"></textarea></div><div class="actions"><button class="btn small" id="copy-preview" disabled>Copy clean text</button><span class="help" id="condition-code" style="margin:0"></span></div><p id="duplicate-note" class="duplicate-note" hidden></p><button class="btn primary save-button" id="save-scenario" disabled>Save scenario</button><p class="help" id="save-hint">Select one level in every dimension to save.</p></div></div><div class="builder-under">Highlighting is for review only. Copies and exports contain the clean script. Saved scenarios keep their original wording.</div></aside></div>
 </section>
-  <section id="library" class="library" aria-labelledby="library-heading"><div class="library-heading"><div><h2 id="library-heading">Saved scenarios <span class="count-pill" id="saved-count">0</span></h2><p id="coverage">Your saved scenarios will appear here.</p></div><div class="actions"><button class="btn" id="export-csv" disabled>Export all CSV</button><button class="btn" id="export-txt" disabled>Export all text</button></div></div><label for="search-scenarios" class="sr-only">Search saved scenarios</label><input id="search-scenarios" class="library-search" type="search" placeholder="Search names, levels, scenario text, or notes" hidden><div id="saved-list"></div><button class="btn" id="load-more" hidden>Show more scenarios</button><p class="help" id="csv-note" hidden>CSV: one row per saved scenario, including its text and dimension-level selections. Formula-like values are prefixed for spreadsheet safety. JSON and text preserve the original characters; JSON also includes the full design and unfinished draft.</p></section>
-<footer class="footer"><span>Factorial v1.0 &middot; Authoring only; no participant data collection.<br>Browser storage is not a backup. Export your project regularly.</span><button class="btn ghost danger small" id="new-project">Start a new project</button></footer>
+<section id="library" class="library" aria-labelledby="library-heading"><div class="library-heading"><div><h2 id="library-heading">Saved scenarios <span class="count-pill" id="saved-count">0</span></h2><p id="coverage">Your saved scenarios will appear here.</p></div><div class="actions"><button class="btn" id="export-csv" disabled>Export all CSV</button><button class="btn" id="export-txt" disabled>Export all text</button><button class="btn" id="export-html" disabled>Export all HTML</button></div></div><label for="search-scenarios" class="sr-only">Search saved scenarios</label><input id="search-scenarios" class="library-search" type="search" placeholder="Search names, levels, scenario text, or notes" hidden><div id="saved-list"></div><button class="btn" id="load-more" hidden>Show more scenarios</button><p class="help" id="csv-note" hidden>Exports include every saved scenario, not the unfinished draft. CSV includes the complete script, selections, and wording fields. HTML keeps instructions and conversation turns visually separate. Export project creates a restorable JSON backup.</p></section>
+<footer class="footer"><span>Factorial v2.0 &middot; Authoring only; no participant data collection.<br>Browser storage is not a backup. Export your project regularly.</span><button class="btn ghost danger small" id="new-project">Start a new project</button></footer>
 </main>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 <input id="import-file" type="file" accept=".json,application/json" hidden>
-<dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title"><h2 id="help-title">Your browser is your workspace.</h2><p>This app stores the current project on this browser and device. It has no server database, login, analytics, or background upload of your scenario content.</p><p><strong>Export project</strong> creates a <code>.json</code> backup with every saved scenario, all used design versions, your current setup, and your unfinished draft. Use <strong>Import project</strong> to restore it or move it to another computer. Import replaces the open project; it does not merge projects.</p><p><strong>Export all CSV</strong> is for spreadsheets and analysis. <strong>Export all text</strong> is for reading or copying the scenarios. These exports contain saved scenarios, not an unfinished draft.</p><p>Clearing site data, changing browsers, using private browsing, or changing the website address can remove or separate your workspace. Files opened directly from your computer may not retain storage consistently. Keep a JSON backup and use the hosted site for regular work.</p><p>People who visit the same hosted app have separate browser workspaces. There is no shared team database. Browser storage is not encrypted by this app; do not use it for confidential participant records.</p><p>The possible-combination count is the product of the numbers of levels. It does not test plausibility, impose constraints, randomize assignments, or guarantee a balanced experimental sample.</p><div class="actions"><button class="btn primary" id="close-help">Got it</button></div></dialog>
+<dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title"><h2 id="help-title">Build the design. Write the script.</h2><p><strong>1. Design setup.</strong> Define dimensions and levels. Each dimension has wording fields shared across its levels, for example emotional state, explanation, and message 1. Enter the appropriate wording for each level. A field can be intentionally empty only when you check <em>Allow empty wording</em>.</p><p><strong>2. Master script.</strong> Add instruction/text blocks and conversation turns. Put your cursor in a text box and click a field in the sidebar to insert it. The same field can appear repeatedly, and a block can use several dimensions. Placeholder IDs can be renamed from Design setup; references in the current script are updated with them.</p><p><strong>3. Build &amp; save.</strong> Choose one level per dimension. All its linked wording changes together. Review with or without highlighting, then save as many scenarios as needed. More wording fields do not increase the factorial condition count. Warnings flag dimensions that never appear in the script, but do not establish manipulation validity or realism.</p><h3>Your browser is your workspace.</h3><p>This app has no server database, login, analytics, external libraries, or background upload of your scenario content. Separate browsers have separate workspaces. Clearing site data, using private browsing, or changing the website address can remove or separate your workspace. Directly opened local files may not retain storage consistently; use the hosted address and keep backups.</p><p><strong>Export project</strong> creates a JSON backup with the current setup, master script, saved scenarios, design versions, and unfinished draft. <strong>Import project</strong> restores it or moves it to another browser. Import replaces the current project; it does not merge projects.</p><p><strong>CSV, text, and HTML</strong> export all saved scenarios, without colored review highlights. CSV prefixes formula-like strings for spreadsheet safety; JSON, text, and HTML preserve their characters. Exports include researcher metadata such as scenario names; review files before sharing them with participants.</p><p><strong>Existing v1 projects</strong> open in their original phrase layout. Saved texts stay unchanged. Convert the editable layout on the Master script page to use multiple fields. Version 2 backups cannot be opened by version 1; keep a v1 backup before upgrading.</p><p>The app does not randomly assign participants, check scientific confounds, impose combination constraints, or collect survey responses. Browser storage is not encrypted by this app. Do not use it for confidential participant records.</p><div class="actions"><button class="btn primary" id="close-help">Got it</button></div></dialog>
+<dialog id="rename-dialog" class="help-dialog" aria-labelledby="rename-title"><h2 id="rename-title">Rename placeholder ID</h2><p class="muted" id="rename-description"></p><label for="rename-value">Placeholder ID</label><input id="rename-value" maxlength="60" pattern="[a-z][a-z0-9_]*" autocomplete="off" spellcheck="false"><p class="help">Use lowercase letters, numbers, and underscores; start with a letter. All references in the current master script are updated. Saved scenarios are unchanged.</p><p id="rename-error" class="rename-error" role="alert" hidden></p><div class="actions" style="margin-top:22px"><button class="btn primary" id="rename-confirm">Rename and update script</button><button class="btn" id="rename-cancel">Cancel</button></div></dialog>
+
 <script>
 'use strict';
 /* Factorial Scenario Builder. No third-party libraries and no network requests.
@@ -56,22 +74,27 @@
  */
 (() => {
 const FORMAT = 'factorial-scenario-builder';
-const SCHEMA = 1;
+const SCHEMA = 2;
+const MAX_FIELDS = 40;
+const MAX_BLOCKS = 200;
+const MAX_SCENARIO_CHARS = 1500000;
 const MAX_DIMENSIONS = 30;
 const MAX_LEVELS = 50;
 const MAX_SCENARIOS = 5000;
 const MAX_IMPORT_BYTES = 25 * 1024 * 1024;
 const pathKey = location.pathname.replace(/\/index\.html?$/i, '/');
+// Keep the original storage key so v1 workspaces migrate at the same website address.
 const STORAGE_KEY = FORMAT + ':v1:' + pathKey;
 const $ = id => document.getElementById(id);
 const clone = obj => JSON.parse(JSON.stringify(obj));
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const now = () => new Date().toISOString();
 const uuid = () => globalThis.crypto?.randomUUID ? crypto.randomUUID() : 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
-const newLevel = () => ({id:uuid(), name:'', text:''});
-const newDimension = () => ({id:uuid(), name:'', prefix:'', levels:[newLevel(), newLevel()]});
+const newLevel = () => ({id:uuid(), name:'', text:'', values:{}});
+const newDimension = (index=1) => ({id:uuid(),name:'',prefix:'',key:'dimension_'+index,slots:[{id:uuid(),key:'wording',name:'Wording',allowEmpty:false}],levels:[newLevel(),newLevel()]});
+const newBlock = (type='text',title='',text='') => ({id:uuid(),type,title,text});
 const blankDraft = () => ({name:'', notes:'', selections:{}});
-const blankState = () => ({format:FORMAT, schemaVersion:SCHEMA, projectId:uuid(), projectName:'', createdAt:now(), updatedAt:now(), design:{intro:'',outro:'',layout:'single',dimensions:[newDimension(),newDimension()]}, versions:[], scenarios:[], draft:blankDraft(), nextNumber:1, step:'setup'});
+const blankState = () => ({format:FORMAT, schemaVersion:SCHEMA, projectId:uuid(), projectName:'', createdAt:now(), updatedAt:now(), design:{intro:'',outro:'',layout:'single',mode:'master',dimensions:[newDimension(1),newDimension(2)],blocks:[newBlock('text','Instructions')]}, versions:[], scenarios:[], draft:blankDraft(), nextNumber:1, step:'setup'});
 let state = blankState();
 let lastRaw = null;
 let persistenceLock = ''; // 'conflict' or 'corrupt'; neither silently overwrites stored data.
@@ -82,6 +105,8 @@ let durable = false;
 let dirtySinceBackup = false;
 let visibleLimit = 30;
 let lastStorageError = '';
+let lastScriptTarget = null;
+let renameTarget = null;
 
 function notify(message, isError=false) {
   clearTimeout(toastTimer); $('toast').textContent = message; $('toast').className = 'toast' + (isError ? ' error':''); $('toast').hidden = false;
@@ -147,6 +172,7 @@ function designErrors(design=state.design) {
       if(!l.name.trim()) errors.push('Enter a name for level '+(j+1)+' of dimension '+(i+1)+'.');
       else {const n=l.name.trim().toLocaleLowerCase(); if(levelNames.has(n)) errors.push('Use distinct level names within dimension '+(i+1)+': "'+l.name+'" is repeated.'); levelNames.add(n);}
     });
+    if(design.mode==='master')for(const slot of d.slots)if(!slot.name.trim())errors.push('Name each wording field in dimension '+(i+1)+'.');
   }); return errors;
 }
 function showDesignErrors(errors) {
@@ -160,17 +186,149 @@ function currentVersion() {const sig=designSignature(state.design); return state
 function versionFor(scenario) {return state.versions.find(v=>v.id===scenario.versionId);}
 function picksFromDraft() {return state.design.dimensions.map(d=>state.draft.selections[d.id]||'');}
 function levelWording(level) {return (level.text.trim()?level.text:level.name).trim();}
+// Template syntax is deliberately small: {{dimension_key.field_key}}.
+// Fields are literal text, never code and never recursively expanded.
+function fieldValue(level, slot) { return typeof level.values?.[slot.id]==='string' ? level.values[slot.id] : ''; }
+function slug(text, fallback='field') {
+  const value=text.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+  return (/^[a-z]/.test(value)?value:'field_'+value).slice(0,55) || fallback;
+}
+function uniqueKey(base, used) { let value=base, n=2; while(used.includes(value))value=base+'_'+n++; return value; }
+function nextDimension() {
+  const d=newDimension(state.design.dimensions.length+1);
+  d.key=uniqueKey(d.key,state.design.dimensions.map(x=>x.key)); return d;
+}
+function tokenCatalog(design) {
+  const map=new Map();
+  design.dimensions.forEach((d,di)=>{
+    map.set(d.key+'.label',{d,di,slot:null,fieldName:'Level name'});
+    for(const slot of d.slots)map.set(d.key+'.'+slot.key,{d,di,slot,fieldName:slot.name});
+  }); return map;
+}
+function tokenMatches(text) { return [...text.matchAll(/\{\{([^{}]*)\}\}/g)].map(m=>({full:m[0],key:m[1].trim(),index:m.index})); }
+function sources(design) {return design.blocks.flatMap((b,i)=>[{text:b.title,where:'Block '+(i+1)+' title'},{text:b.text,where:'Block '+(i+1)+' text'}]);}
+function tokenUsage(design=state.design) {
+  const usage=new Map();
+  for(const source of sources(design))for(const match of tokenMatches(source.text))usage.set(match.key,(usage.get(match.key)||0)+1);
+  return usage;
+}
+function scriptAudit(design=state.design) {
+  const errors=[], warnings=[], usedDims=new Set(), usedFields=new Map();let placements=0;
+  if(design.mode==='simple')return {errors,warnings,placements,usedDims,usedFields};
+  const catalog=tokenCatalog(design);
+  if(!design.blocks.some(b=>b.title.trim()||b.text.trim()))errors.push('Add some content to the master script.');
+  for(const source of sources(design)) {
+    const matches=tokenMatches(source.text);
+    const rest=source.text.replace(/\{\{([^{}]*)\}\}/g,'');
+    if(rest.includes('{{')||rest.includes('}}'))errors.push(source.where+': a placeholder has unmatched or nested braces. Use {{dimension.field}}.');
+    for(const match of matches) {
+      const item=catalog.get(match.key);
+      if(!item) {errors.push(source.where+': unknown placeholder '+match.full+'. Insert a field from the sidebar or correct its ID.');continue;}
+      placements++;usedDims.add(item.d.id);
+      if(item.slot)usedFields.set(match.key,item);
+    }
+  }
+  for(const [key,item] of usedFields) {
+    if(item.slot.allowEmpty)continue;
+    const missing=item.d.levels.filter(l=>!fieldValue(l,item.slot).trim());
+    if(missing.length)errors.push('{{'+key+'}} has no wording for '+missing.map(l=>'"'+(l.name||'unnamed level')+'"').join(', ')+'. Fill it in on Design setup, or explicitly allow empty wording for this field.');
+  }
+  for(const d of design.dimensions)if(!usedDims.has(d.id))warnings.push('"'+(d.name||'Unnamed dimension')+'" never appears in the script. Changing its level will not change the vignette.');
+  return {errors:[...new Set(errors)],warnings,placements,usedDims,usedFields};
+}
+function resolveTemplate(text,design,picks,html=false,partial=false) {
+  const catalog=tokenCatalog(design);let out='',last=0;
+  for(const match of tokenMatches(text)) {
+    out+=html?esc(text.slice(last,match.index)):text.slice(last,match.index);
+    const item=catalog.get(match.key);
+    if(!item) {const value='[Unknown placeholder: '+match.key+']';out+=html?'<span class="missing-variable">'+esc(value)+'</span>':value;}
+    else {
+      const level=item.d.levels.find(l=>l.id===picks[item.di]);
+      if(!level) {
+        const value=partial?'[Choose '+item.d.name+': '+item.fieldName+']':'';
+        out+=html?'<span class="missing-variable">'+esc(value)+'</span>':value;
+      } else {
+        const value=item.slot?fieldValue(level,item.slot):level.name;
+        out+=html&&value?'<mark class="variable tone-'+(item.di%8)+'" title="'+esc(item.d.name+' / '+level.name+' / '+item.fieldName)+'">'+esc(value)+'</mark>':html?esc(value):value;
+      }
+    }
+    last=match.index+match.full.length;
+    if(out.length>MAX_SCENARIO_CHARS*4)throw Error('This script is too long to render safely. Shorten the text or use fewer placements.');
+  }
+  out+=html?esc(text.slice(last)):text.slice(last);
+  return out;
+}
+function resolvedBlocks(design,picks,partial=false) {
+  return design.blocks.map(b=>({id:b.id,type:b.type,title:resolveTemplate(b.title,design,picks,false,partial),text:resolveTemplate(b.text,design,picks,false,partial)})).filter(b=>b.title.trim()||b.text.trim());
+}
 function compose(design,picks,partial=false) {
+  if(design.mode==='master') {
+    const text=resolvedBlocks(design,picks,partial).map(b=>b.type==='turn'?(b.title?b.title+': ':'')+b.text:[b.title,b.text].filter(x=>x!=='').join('\n')).join('\n\n');
+    if(text.length>MAX_SCENARIO_CHARS)throw Error('The composed scenario exceeds 1,500,000 characters. Shorten the script.');return text;
+  }
+  // Original v1 composition is unchanged, including its whitespace behavior.
   const segments=[];
-  if(design.intro.trim()) segments.push(design.intro.trim());
-  design.dimensions.forEach((d,i)=>{
-    const level=d.levels.find(l=>l.id===picks[i]);
-    const wording=level?levelWording(level):(partial?'[Choose a level for '+d.name+']':'');
-    const segment=[d.prefix.trim(),wording].filter(Boolean).join(' ');
-    if(segment) segments.push(segment);
+  if(design.intro.trim())segments.push(design.intro.trim());
+  design.dimensions.forEach((d,i)=>{const level=d.levels.find(l=>l.id===picks[i]);const wording=level?levelWording(level):(partial?'[Choose a level for '+d.name+']':'');const segment=[d.prefix.trim(),wording].filter(Boolean).join(' ');if(segment)segments.push(segment);});
+  if(design.outro.trim())segments.push(design.outro.trim());return segments.join(design.layout==='paragraphs'?'\n\n':' ');
+}
+function renderDocument(design,picks,partial=false) {
+  if(design.mode==='simple')return '<div class="script-body">'+esc(compose(design,picks,partial))+'</div>';
+  return design.blocks.filter(b=>b.title.trim()||b.text.trim()).map(b=>{
+    const title=resolveTemplate(b.title,design,picks,true,partial),text=resolveTemplate(b.text,design,picks,true,partial);
+    if(b.type==='turn')return '<div class="dialogue-turn"><div class="dialogue-speaker">'+title+'</div><div class="dialogue-text">'+text+'</div></div>';
+    return '<section class="script-section">'+(title?'<h3 class="script-section-title">'+title+'</h3>':'')+(text?'<div class="script-body">'+text+'</div>':'')+'</section>';
+  }).join('');
+}
+function cleanDocument(design,picks) {
+  // For exported HTML, remove researcher highlights and their identifying titles.
+  const holder=document.createElement('div');holder.innerHTML=renderDocument(design,picks);
+  holder.querySelectorAll('mark').forEach(el=>el.replaceWith(document.createTextNode(el.textContent)));
+  return holder.innerHTML;
+}
+function renameReferences(oldKey,newKey) {
+  for(const b of state.design.blocks)for(const field of ['title','text'])b[field]=b[field].replace(/\{\{([^{}]*)\}\}/g,(full,key)=>{
+    const trimmed=key.trim();return trimmed===oldKey?'{{'+newKey+'}}':trimmed.startsWith(oldKey+'.')?'{{'+newKey+trimmed.slice(oldKey.length)+'}}':full;
   });
-  if(design.outro.trim()) segments.push(design.outro.trim());
-  return segments.join(design.layout==='paragraphs'?'\n\n':' ');
+}
+function autoDimensionKey(d,oldName) {
+  if(!oldName.trim()&&/^dimension_\d+(?:_\d+)?$/.test(d.key)&&d.name.trim()) {
+    const next=uniqueKey(slug(d.name,'dimension'),state.design.dimensions.filter(x=>x.id!==d.id).map(x=>x.key));renameReferences(d.key,next);d.key=next;return true;
+  }return false;
+}
+function openRename(d,slot=null) {
+  renameTarget={dim:d.id,slot:slot?.id||null};
+  $('rename-title').textContent=slot?'Rename field placeholder':'Rename dimension placeholder';
+  $('rename-description').textContent=slot?'Current placeholder: {{'+d.key+'.'+slot.key+'}}':'This ID is the first part of every placeholder for '+(d.name||'this dimension')+'.';
+  $('rename-value').value=slot?slot.key:d.key;$('rename-error').hidden=true;$('rename-dialog').showModal();$('rename-value').focus();$('rename-value').select();
+}
+function confirmRename() {
+  if(!renameTarget)return;
+  const d=state.design.dimensions.find(x=>x.id===renameTarget.dim),slot=renameTarget.slot?d?.slots.find(x=>x.id===renameTarget.slot):null;
+  if(!d)return;
+  const value=$('rename-value').value.trim();let error='';
+  if(!/^[a-z][a-z0-9_]{0,59}$/.test(value))error='Use 1-60 lowercase letters, numbers, or underscores, starting with a letter.';
+  if(slot&&(value==='label'||d.slots.some(x=>x.id!==slot.id&&x.key===value)))error='That ID is already used in this dimension. "label" is reserved for the level name.';
+  if(!slot&&state.design.dimensions.some(x=>x.id!==d.id&&x.key===value))error='Another dimension already uses that ID.';
+  if(error){$('rename-error').textContent=error;$('rename-error').hidden=false;return;}
+  const old=slot?d.key+'.'+slot.key:d.key, next=slot?d.key+'.'+value:value;
+  renameReferences(old,next);if(slot)slot.key=value;else d.key=value;
+  markChanged();renderDimensions();$('rename-dialog').close();renameTarget=null;notify('Placeholder ID updated throughout the current script.');
+}
+function convertToMaster() {
+  if(state.design.mode==='master')return;
+  if(!confirm('Convert the editable phrase layout into a master script? Saved scenarios keep their exact original wording.'))return;
+  const d=state.design, parts=[];
+  if(d.intro.trim())parts.push(d.intro.trim());
+  for(const dim of d.dimensions) {
+    let slot=dim.slots.find(x=>x.key==='wording');
+    if(!slot){slot={id:uuid(),name:'Wording',key:uniqueKey('wording',dim.slots.map(x=>x.key)),allowEmpty:false};dim.slots.push(slot);}
+    for(const level of dim.levels)level.values[slot.id]=levelWording(level);
+    parts.push([dim.prefix.trim(),'{{'+dim.key+'.'+slot.key+'}}'].filter(Boolean).join(' '));
+  }
+  if(d.outro.trim())parts.push(d.outro.trim());
+  d.blocks=[newBlock('text','',parts.join(d.layout==='paragraphs'?'\n\n':' '))];d.mode='master';lastScriptTarget=null;
+  markChanged();renderScript();notify('Original wording converted. Add more fields on Design setup and place them in this script.');
 }
 function conditionCode(design,picks) {return design.dimensions.map((d,i)=>'D'+(i+1)+'L'+(d.levels.findIndex(l=>l.id===picks[i])+1)).join('-');}
 function findDuplicate() {
@@ -186,10 +344,78 @@ function updateStats() {
 }
 function renderSetup() {
   $('project-name').value=state.projectName;
-  $('intro').value=state.design.intro; $('outro').value=state.design.outro; $('layout').value=state.design.layout;
-  renderDimensions(); updateStats();
+  $('intro').value=state.design.intro;$('outro').value=state.design.outro;$('layout').value=state.design.layout;
+  $('simple-settings').hidden=state.design.mode!=='simple';$('legacy-notice').hidden=state.design.mode!=='simple';$('master-explainer').hidden=state.design.mode==='simple';
+  renderDimensions();updateStats();
 }
 function renderDimensions() {
+  if(state.design.mode==='simple'){renderLegacyDimensions();return;}
+  const usage=tokenUsage();
+  $('dimensions').innerHTML=state.design.dimensions.map((d,i)=>`
+    <article class="panel dimension-card master" data-dimension="${esc(d.id)}">
+      <div class="dimension-head"><div class="dimension-title"><span class="dim-number">DIMENSION ${String(i+1).padStart(2,'0')}</span><h3 id="title-${esc(d.id)}">${esc(d.name||'Untitled dimension')}</h3></div><div class="actions"><button class="btn small ghost" data-action="move-up" data-dim="${esc(d.id)}" aria-label="Move dimension ${i+1} up" ${i===0?'disabled':''}>&uarr;</button><button class="btn small ghost" data-action="move-down" data-dim="${esc(d.id)}" aria-label="Move dimension ${i+1} down" ${i===state.design.dimensions.length-1?'disabled':''}>&darr;</button><button class="btn small ghost danger" data-action="remove-dim" data-dim="${esc(d.id)}" aria-label="Remove dimension ${i+1}" ${state.design.dimensions.length===1?'disabled':''}>Remove</button></div></div>
+      <div class="dimension-body"><label for="name-${esc(d.id)}">Dimension name</label><input id="name-${esc(d.id)}" data-dim="${esc(d.id)}" data-field="name" maxlength="200" value="${esc(d.name)}" placeholder="e.g. Human emotion"><div class="key-row"><span class="help" style="margin:0">Placeholder ID:</span><code id="dim-key-${esc(d.id)}">${esc(d.key)}</code><button class="btn ghost small" data-action="rename-dim" data-dim="${esc(d.id)}">Rename ID</button></div>
+      <div class="level-top"><div><h3>Levels</h3><p class="help">Select one of these levels when you build a scenario.</p></div><div class="number-control"><label for="count-${esc(d.id)}" class="level-count-label">Number of levels</label><input id="count-${esc(d.id)}" type="number" min="1" max="${MAX_LEVELS}" step="1" value="${d.levels.length}"><button class="btn small" data-action="apply-levels" data-dim="${esc(d.id)}">Apply</button></div></div>
+      <div class="level-name-grid">${d.levels.map((l,j)=>`<div><label for="level-name-${esc(l.id)}">Level ${j+1} name</label><input id="level-name-${esc(l.id)}" data-dim="${esc(d.id)}" data-level="${esc(l.id)}" data-field="name" maxlength="200" value="${esc(l.name)}" placeholder="e.g. ${j===0?'Happy':'Sad'}"></div>`).join('')}</div>
+      <div class="field-intro"><div><h3>Wording fields</h3><p class="help">Each row is one reusable piece of text. Write its wording for every level. Add rows for emotional states, explanations, dialogue lines, or smaller phrases.</p></div><span class="count-pill">${d.slots.length} fields</span></div>
+      <div class="field-table-wrap" tabindex="0" role="region" aria-label="Wording fields for dimension ${i+1}; scroll horizontally for more levels"><table class="field-table" style="min-width:${Math.max(600,220+d.levels.length*230)}px"><thead><tr><th class="field-col" scope="col">Field / placeholder</th>${d.levels.map((l,j)=>`<th scope="col" id="field-level-${esc(l.id)}">${esc(l.name||'Level '+(j+1))}</th>`).join('')}</tr></thead><tbody>
+      ${d.slots.map(slot=>`<tr><th scope="row"><label class="sr-only" for="field-name-${esc(slot.id)}">Wording field name</label><input class="field-name" id="field-name-${esc(slot.id)}" data-dim="${esc(d.id)}" data-slot="${esc(slot.id)}" data-field="slot-name" maxlength="200" value="${esc(slot.name)}" placeholder="e.g. Explanation"><code class="field-token" data-token-slot="${esc(slot.id)}">{{${esc(d.key+'.'+slot.key)}}}</code><div class="field-actions"><button class="btn ghost" data-action="rename-slot" data-dim="${esc(d.id)}" data-slot="${esc(slot.id)}">Rename ID</button><button class="btn ghost danger" data-action="remove-slot" data-dim="${esc(d.id)}" data-slot="${esc(slot.id)}" aria-label="Remove field ${esc(slot.name)}" ${d.slots.length<=1?'disabled':''}>Remove</button></div><label class="check-label"><input type="checkbox" data-dim="${esc(d.id)}" data-slot="${esc(slot.id)}" data-field="allow-empty" ${slot.allowEmpty?'checked':''}>Allow empty wording</label><p class="help" data-usage-slot="${esc(slot.id)}">${usage.get(d.key+'.'+slot.key)||0} script placements</p></th>${d.levels.map(l=>`<td><label class="sr-only" for="value-${esc(l.id)}-${esc(slot.id)}">${esc(slot.name)} for ${esc(l.name||'unnamed level')} in ${esc(d.name||'unnamed dimension')}</label><textarea id="value-${esc(l.id)}-${esc(slot.id)}" data-dim="${esc(d.id)}" data-level="${esc(l.id)}" data-slot="${esc(slot.id)}" data-field="value" maxlength="20000" placeholder="Exact text to insert for this level">${esc(fieldValue(l,slot))}</textarea></td>`).join('')}</tr>`).join('')}
+      </tbody></table></div><div class="field-footer"><button class="btn small" data-action="add-slot" data-dim="${esc(d.id)}">+ Add wording field</button><span class="help">Repeat any field in the script; it stays linked to this dimension.</span></div></div>
+    </article>`).join('');
+}
+function dimensionInput(e) {
+  const {dim,level,slot,field}=e.target.dataset;if(!dim||!field)return;
+  const d=state.design.dimensions.find(x=>x.id===dim);if(!d)return;
+  const l=level?d.levels.find(x=>x.id===level):null,s=slot?d.slots.find(x=>x.id===slot):null;
+  if(field==='value'&&l&&s)l.values[s.id]=e.target.value;
+  else if(field==='slot-name'&&s){s.name=e.target.value;}
+  else if(field==='allow-empty'&&s)s.allowEmpty=e.target.checked;
+  else if(l&&['name','text'].includes(field)){l[field]=e.target.value;if(field==='name'&&$('field-level-'+l.id))$('field-level-'+l.id).textContent=l.name||'Unnamed level';}
+  else if(['name','prefix'].includes(field)){d[field]=e.target.value;if(field==='name')$('title-'+d.id).textContent=d.name||'Untitled dimension';}
+  else return;
+  markChanged();if(!$('setup-errors').hidden)showDesignErrors([]);
+}
+function dimensionChanged(e) {
+  const {dim,slot,field}=e.target.dataset;
+  const d=state.design.dimensions.find(x=>x.id===dim);if(!d)return;
+  if(field==='name'&&!e.target.dataset.level&&/^dimension_\d+(?:_\d+)?$/.test(d.key)&&d.name.trim()) {
+    const next=uniqueKey(slug(d.name,'dimension'),state.design.dimensions.filter(x=>x.id!==d.id).map(x=>x.key));renameReferences(d.key,next);d.key=next;markChanged();updateTokenLabels(d);
+  }
+  if(field==='slot-name'&&slot) {
+    const s=d.slots.find(x=>x.id===slot);if(!s||!/^field_\d+$/.test(s.key)||!s.name.trim())return;
+    const next=uniqueKey(slug(s.name,'field'),['label',...d.slots.filter(x=>x.id!==s.id).map(x=>x.key)]);
+    renameReferences(d.key+'.'+s.key,d.key+'.'+next);s.key=next;markChanged();updateTokenLabels(d);
+  }
+}
+function updateTokenLabels(d) {
+  if($('dim-key-'+d.id))$('dim-key-'+d.id).textContent=d.key;
+  const card=[...$('dimensions').querySelectorAll('[data-dimension]')].find(x=>x.dataset.dimension===d.id);
+  if(card)for(const el of card.querySelectorAll('[data-token-slot]')){const s=d.slots.find(x=>x.id===el.dataset.tokenSlot);if(s)el.textContent='{{'+d.key+'.'+s.key+'}}';}
+}
+function dimensionClick(e) {
+  const b=e.target.closest('button[data-action]');if(!b)return;
+  const {action,dim,slot}=b.dataset,index=state.design.dimensions.findIndex(x=>x.id===dim);if(index<0)return;
+  const d=state.design.dimensions[index],s=slot?d.slots.find(x=>x.id===slot):null;
+  if(action==='apply-levels'){applyLevelCount(dim);return;}
+  if(action==='rename-dim'){openRename(d);return;}
+  if(action==='rename-slot'&&s){openRename(d,s);return;}
+  if(action==='add-slot') {
+    if(d.slots.length>=MAX_FIELDS){notify('A dimension supports up to '+MAX_FIELDS+' wording fields.',true);return;}
+    const key=uniqueKey('field_'+(d.slots.length+1),d.slots.map(x=>x.key));const item={id:uuid(),key,name:'',allowEmpty:false};d.slots.push(item);d.levels.forEach(l=>l.values[item.id]='');markChanged();renderDimensions();$('field-name-'+item.id).focus();return;
+  }
+  if(action==='remove-slot'&&s) {
+    if(d.slots.length<=1)return;
+    const n=tokenUsage().get(d.key+'.'+s.key)||0;
+    if(!confirm('Remove "'+(s.name||s.key)+'" and its wording for every level? '+(n?n+' placeholder placement(s) will need to be removed or replaced in the master script. ':'')+'Saved scenarios stay unchanged.'))return;
+    d.slots=d.slots.filter(x=>x.id!==s.id);d.levels.forEach(l=>delete l.values[s.id]);
+  }
+  if(action==='remove-dim'){if(state.design.dimensions.length<=1)return;if(!confirm('Remove this dimension? Its placeholders, if used, must be replaced or removed from the current master script. Saved scenarios keep their original design.'))return;state.design.dimensions.splice(index,1);}
+  if(action==='move-up'&&index>0)[state.design.dimensions[index-1],state.design.dimensions[index]]=[state.design.dimensions[index],state.design.dimensions[index-1]];
+  if(action==='move-down'&&index<state.design.dimensions.length-1)[state.design.dimensions[index],state.design.dimensions[index+1]]=[state.design.dimensions[index+1],state.design.dimensions[index]];
+  normalizePicks();markChanged();renderDimensions();updateStats();
+}
+
+function renderLegacyDimensions() {
   $('dimensions').innerHTML=state.design.dimensions.map((d,i)=>`
     <article class="panel dimension-card" data-dimension="${esc(d.id)}">
       <div class="dimension-head"><div class="dimension-title"><span class="dim-number">DIMENSION ${String(i+1).padStart(2,'0')}</span><h3 id="title-${esc(d.id)}">${esc(d.name||'Untitled dimension')}</h3></div><div class="actions"><button class="btn small ghost" data-action="move-up" data-dim="${esc(d.id)}" aria-label="Move dimension ${i+1} up" ${i===0?'disabled':''}>&uarr;</button><button class="btn small ghost" data-action="move-down" data-dim="${esc(d.id)}" aria-label="Move dimension ${i+1} down" ${i===state.design.dimensions.length-1?'disabled':''}>&darr;</button><button class="btn small ghost danger" data-action="remove-dim" data-dim="${esc(d.id)}" aria-label="Remove dimension ${i+1}" ${state.design.dimensions.length===1?'disabled':''}>Remove</button></div></div>
@@ -205,7 +431,7 @@ function applyDimensionCount() {
   if(!Number.isInteger(n)||n<1||n>MAX_DIMENSIONS) {notify('Use a whole number from 1 to '+MAX_DIMENSIONS+' dimensions.',true); $('dimension-count').value=current; return false;}
   if(n===current)return true;
   if(n<current&&!confirm('Remove the last '+(current-n)+' dimension(s) from the current design? Saved scenarios keep their original design.')) {$('dimension-count').value=current; return false;}
-  while(state.design.dimensions.length<n)state.design.dimensions.push(newDimension());
+  while(state.design.dimensions.length<n)state.design.dimensions.push(nextDimension());
   state.design.dimensions.length=n; normalizePicks(); markChanged(); renderDimensions(); updateStats(); return true;
 }
 function applyLevelCount(id) {
@@ -224,86 +450,145 @@ function applyPendingCounts() {
   for(const r of requested) {const el=$('count-'+r.id); if(el) {el.value=r.value; if(!applyLevelCount(r.id))return false;}}
   return true;
 }
+function renderScript() {
+  const master=state.design.mode==='master';
+  $('simple-script-panel').hidden=master;$('master-script-panel').hidden=!master;
+  if(!master)return;
+  $('block-count').textContent=state.design.blocks.length+' block'+(state.design.blocks.length===1?'':'s');
+  $('script-blocks').innerHTML=state.design.blocks.map((b,i)=>`
+  <article class="panel script-block" data-block="${esc(b.id)}"><div class="block-head"><span class="block-label">${String(i+1).padStart(2,'0')} / ${b.type==='turn'?'Conversation turn':'Instruction / text'}</span><div class="actions"><button class="btn small ghost" data-block-action="up" data-id="${esc(b.id)}" aria-label="Move block ${i+1} up" ${i===0?'disabled':''}>&uarr;</button><button class="btn small ghost" data-block-action="down" data-id="${esc(b.id)}" aria-label="Move block ${i+1} down" ${i===state.design.blocks.length-1?'disabled':''}>&darr;</button><button class="btn small ghost" data-block-action="duplicate" data-id="${esc(b.id)}" aria-label="Duplicate block ${i+1}">Duplicate</button><button class="btn small ghost danger" data-block-action="remove" data-id="${esc(b.id)}" aria-label="Remove block ${i+1}" ${state.design.blocks.length<=1?'disabled':''}>Remove</button></div></div><div class="block-body"><div class="block-field"><label for="block-title-${esc(b.id)}">${b.type==='turn'?'Speaker':'Section title (optional)'}</label><input id="block-title-${esc(b.id)}" class="template-editor" data-block-id="${esc(b.id)}" data-block-field="title" maxlength="500" value="${esc(b.title)}" placeholder="${b.type==='turn'?'e.g. Human or Chatbot':'e.g. Instructions'}"></div><div class="block-field"><label for="block-text-${esc(b.id)}">${b.type==='turn'?'Message':'Text'}</label><textarea id="block-text-${esc(b.id)}" class="template-editor" data-block-id="${esc(b.id)}" data-block-field="text" maxlength="20000" rows="${b.type==='turn'?4:7}" spellcheck="true" placeholder="Write fixed text and insert wording fields from the sidebar.">${esc(b.text)}</textarea></div></div></article>`).join('');
+  renderTokenLibrary();renderAudit();
+}
+function renderTokenLibrary() {
+  const usage=tokenUsage();
+  $('token-library').innerHTML=state.design.dimensions.map(d=>{
+    const items=[{key:'label',name:'Level name'},...d.slots];
+    return `<details class="token-group" open><summary>${esc(d.name||d.key)}</summary><p class="help">${d.levels.map(l=>esc(l.name||'Unnamed level')).join(' / ')}</p><div class="token-list">${items.map(s=>`<button class="token-btn" data-insert-token="${esc(d.key+'.'+s.key)}" title="Insert {{${esc(d.key+'.'+s.key)}}}"><span>${esc(s.name||s.key)}${usage.get(d.key+'.'+s.key)?' <span class="token-uses">'+usage.get(d.key+'.'+s.key)+(usage.get(d.key+'.'+s.key)===1?' use':' uses')+'</span>':''}</span><code>{{${esc(d.key+'.'+s.key)}}}</code></button>`).join('')}</div></details>`;
+  }).join('');
+}
+function renderAudit() {
+  const audit=scriptAudit(),box=$('script-audit');
+  box.className='audit-panel '+(audit.errors.length?'bad':audit.warnings.length?'warn':'good');
+  const title=audit.errors.length?audit.errors.length+' issue'+(audit.errors.length===1?'':'s')+' to resolve':audit.warnings.length?'Review before building':'All linked wording is ready';
+  box.innerHTML='<p class="audit-title">'+esc(title)+'</p><p class="help">'+audit.placements+' placeholder placements &middot; '+audit.usedDims.size+' of '+state.design.dimensions.length+' dimensions used</p>'+((audit.errors.length||audit.warnings.length)?'<ul>'+audit.errors.slice(0,12).map(x=>'<li class="audit-error">'+esc(x)+'</li>').join('')+(audit.errors.length>12?'<li>'+String(audit.errors.length-12)+' more issues.</li>':'')+audit.warnings.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'<p class="help">Repeated placeholders stay linked to the same selected level. Review the finished scenarios for coherence and manipulation validity.</p>');
+}
+function scriptInput(e) {
+  const {blockId,blockField}=e.target.dataset;if(!blockId||!['title','text'].includes(blockField))return;
+  const b=state.design.blocks.find(x=>x.id===blockId);if(!b)return;b[blockField]=e.target.value;
+  lastScriptTarget=e.target.id;markChanged();renderAudit();
+}
+function addBlock(type) {
+  if(state.design.blocks.length>=MAX_BLOCKS){notify('The script supports up to '+MAX_BLOCKS+' blocks.',true);return;}
+  const last=state.design.blocks.filter(b=>b.type==='turn').at(-1);
+  const b=newBlock(type,type==='turn'?(last?.title==='Human'?'Chatbot':'Human'):'');state.design.blocks.push(b);
+  markChanged();renderScript();lastScriptTarget='block-text-'+b.id;$(lastScriptTarget).focus();$(lastScriptTarget).scrollIntoView({block:'center',behavior:'smooth'});
+}
+function blockClick(e) {
+  const b=e.target.closest('button[data-block-action]');if(!b)return;
+  const i=state.design.blocks.findIndex(x=>x.id===b.dataset.id);if(i<0)return;
+  const blocks=state.design.blocks,action=b.dataset.blockAction;
+  if(action==='up'&&i>0)[blocks[i-1],blocks[i]]=[blocks[i],blocks[i-1]];
+  if(action==='down'&&i<blocks.length-1)[blocks[i],blocks[i+1]]=[blocks[i+1],blocks[i]];
+  if(action==='duplicate'){
+    if(blocks.length>=MAX_BLOCKS){notify('The script supports up to '+MAX_BLOCKS+' blocks.',true);return;}
+    const copy=clone(blocks[i]);copy.id=uuid();blocks.splice(i+1,0,copy);
+  }
+  if(action==='remove'){
+    if(blocks.length<=1)return;
+    if((blocks[i].text||blocks[i].title)&&!confirm('Remove this block from the current script? Saved scenarios will not change.'))return;
+    blocks.splice(i,1);
+  }
+  markChanged();renderScript();
+}
+function insertToken(key) {
+  let editor=lastScriptTarget?$(lastScriptTarget):null;
+  if(!editor||!editor.classList.contains('template-editor'))editor=$('script-blocks').querySelector('textarea');
+  if(!editor){notify('Add a text block or conversation turn first.',true);return;}
+  const text='{{'+key+'}}',start=editor.selectionStart??editor.value.length,end=editor.selectionEnd??start;
+  if(editor.value.length-(end-start)+text.length>editor.maxLength){notify('This text box has reached its character limit.',true);return;}
+  editor.setRangeText(text,start,end,'end');editor.focus({preventScroll:true});lastScriptTarget=editor.id;
+  scriptInput({target:editor});editor.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
 function switchStep(step,focus=true) {
-  if(step==='build') {
-    if(state.step==='setup'&&!applyPendingCounts())return;
+  if(state.step==='setup'&&step!=='setup'&&!applyPendingCounts())return;
+  if(step==='script'||step==='build') {
     const errors=designErrors();
-    if(errors.length) {state.step='setup'; renderPage(false); showDesignErrors(errors);return;}
+    if(errors.length){state.step='setup';renderPage(false);showDesignErrors(errors);return;}
     showDesignErrors([]);
   }
-  state.step=step; markChanged(); renderPage(focus);
+  if(step==='build'&&state.design.mode==='master') {
+    const audit=scriptAudit();
+    if(audit.errors.length){state.step='script';markChanged();renderPage(focus);$('script-audit').scrollIntoView({block:'center',behavior:'smooth'});notify('Resolve the script issues before building scenarios.',true);return;}
+  }
+  state.step=step;markChanged();renderPage(focus);
 }
 function renderPage(focus=false) {
-  $('setup-page').hidden=state.step!=='setup'; $('build-page').hidden=state.step!=='build';
-  for(const step of ['setup','build']) {$('step-'+step).removeAttribute('aria-current');}
+  for(const step of ['setup','script','build']){$(step+'-page').hidden=state.step!==step;$('step-'+step).removeAttribute('aria-current');}
   $('step-'+state.step).setAttribute('aria-current','step');
-  if(state.step==='setup') {renderSetup();renderSaved();} else renderBuilder();
-  $('nav-count').textContent=state.scenarios.length;
-  if(focus) {window.scrollTo({top:0,behavior:'smooth'}); $(state.step==='setup'?'setup-heading':'build-heading').focus({preventScroll:true});}
+  if(state.step==='setup')renderSetup();else if(state.step==='script')renderScript();else renderBuilder();
+  renderSaved();updateStats();
+  if(focus){window.scrollTo({top:0,behavior:'smooth'});$(state.step==='setup'?'setup-heading':state.step==='script'?'script-heading':'build-heading').focus({preventScroll:true});}
 }
 function renderBuilder() {
-  normalizePicks();
-  $('build-subtitle').textContent=(state.projectName.trim()?state.projectName.trim()+' \u00b7 ':'')+'Choose one level for every dimension. Your scenario updates as you select.';
-  $('choices').innerHTML=state.design.dimensions.map((d,i)=>`<div class="panel choice-card"><fieldset><legend><div class="choice-title"><div><div class="choice-number">DIMENSION ${String(i+1).padStart(2,'0')}</div><h3>${esc(d.name)}</h3></div><span class="count-pill">${d.levels.length} levels</span></div></legend><p class="phrase">${esc(d.prefix||'Select one level:')}</p>${d.levels.map(l=>`<label class="level-option"><input type="radio" name="choice-${esc(d.id)}" value="${esc(l.id)}" data-dim="${esc(d.id)}" ${state.draft.selections[d.id]===l.id?'checked':''}><span><span class="option-label">${esc(l.name)}</span>${l.text.trim()?'<span class="option-text">'+esc(l.text)+'</span>':''}</span></label>`).join('')}</fieldset></div>`).join('');
-  $('scenario-name').value=state.draft.name; $('scenario-notes').value=state.draft.notes;
-  $('scenario-name').placeholder='Scenario '+String(state.nextNumber).padStart(3,'0');
-  updatePreview(); renderSaved();
+  normalizePicks();const master=state.design.mode==='master',usage=tokenUsage();
+  $('build-subtitle').textContent=(state.projectName.trim()?state.projectName.trim()+' \u00b7 ':'')+'Choose one level per dimension. Every linked piece of wording updates together.';
+  $('choices').innerHTML=state.design.dimensions.map((d,i)=>{
+    const n=[...usage].filter(([key])=>key.startsWith(d.key+'.')).reduce((sum,[key,value])=>sum+value,0);
+    return `<div class="panel choice-card"><fieldset><legend><div class="choice-title"><div><div class="choice-number">DIMENSION ${String(i+1).padStart(2,'0')}</div><h3>${esc(d.name)}</h3></div><span class="count-pill">${d.levels.length} levels</span></div></legend>${master?'<p class="choice-description">'+d.slots.length+' wording fields &middot; '+n+' linked placements in the script</p>':'<p class="phrase">'+esc(d.prefix||'Select one level:')+'</p>'}${d.levels.map(l=>{const text=master?(d.slots[0]?fieldValue(l,d.slots[0]):''):l.text;return `<label class="level-option"><input type="radio" name="choice-${esc(d.id)}" value="${esc(l.id)}" data-dim="${esc(d.id)}" ${state.draft.selections[d.id]===l.id?'checked':''}><span><span class="option-label">${esc(l.name)}</span>${text.trim()&&text.trim().toLocaleLowerCase()!==l.name.trim().toLocaleLowerCase()?'<span class="option-text">'+esc(text.length>190?text.slice(0,187)+'...':text)+'</span>':''}</span></label>`;}).join('')}</fieldset>${master?'<details class="choice-wording"><summary>Inspect wording for this selection</summary><div id="selected-wording-'+esc(d.id)+'"></div></details>':''}</div>`;
+  }).join('');
+  $('scenario-name').value=state.draft.name;$('scenario-notes').value=state.draft.notes;$('scenario-name').placeholder='Scenario '+String(state.nextNumber).padStart(3,'0');
+  const audit=scriptAudit();$('build-warnings').hidden=!audit.warnings.length;$('build-warnings').textContent=audit.warnings.join(' ');
+  $('highlight-toggle').disabled=!master;updatePreview();renderSaved();
 }
 function updatePreview() {
-  const picks=picksFromDraft(), n=picks.filter(Boolean).length, complete=n===state.design.dimensions.length;
-  $('selection-progress').textContent=n+' / '+picks.length+' selected';
-  $('selection-progress').className='progress-chip'+(complete?' complete':'');
-  $('scenario-preview').textContent=compose(state.design,picks,true);
-  $('scenario-preview').className='scenario-prose'+(complete?'':' placeholder');
-  $('save-scenario').disabled=!complete; $('copy-preview').disabled=!complete;
+  const picks=picksFromDraft(),n=picks.filter(Boolean).length,complete=n===state.design.dimensions.length;
+  const audit=scriptAudit();let error='';
+  $('selection-progress').textContent=n+' / '+picks.length+' selected';$('selection-progress').className='progress-chip'+(complete?' complete':'');
+  try{compose(state.design,picks,true);$('scenario-preview').innerHTML=renderDocument(state.design,picks,true);}catch(err){error=err.message;$('scenario-preview').textContent=error;}
+  $('scenario-preview').className='script-document'+($('highlight-toggle').checked?'':' clean');
+  const canSave=complete&&!audit.errors.length&&!error;
+  $('save-scenario').disabled=!canSave;$('copy-preview').disabled=!canSave;
   $('condition-code').textContent=complete?conditionCode(state.design,picks):'';
-  const dupe=complete?findDuplicate():null;
-  $('duplicate-note').hidden=!dupe;
+  const dupe=canSave?findDuplicate():null;$('duplicate-note').hidden=!dupe;
   $('duplicate-note').textContent=dupe?'This combination is already saved as "'+dupe.name+'". You can still save another copy.':'';
-  $('save-hint').textContent=complete?'Save this combination, then start another scenario.':'Select one level in every dimension to save.';
+  $('save-hint').textContent=error|| (audit.errors.length?'Resolve script issues before saving.':complete?'Save this combination, then change a level to create another.':'Select one level in every dimension to save.');
+  for(const d of state.design.dimensions) {
+    const area=$('selected-wording-'+d.id);if(!area)continue;
+    const l=d.levels.find(x=>x.id===state.draft.selections[d.id]);
+    area.innerHTML=l?'<dl>'+d.slots.map(s=>'<dt>'+esc(s.name)+'</dt><dd>'+esc(fieldValue(l,s)||(s.allowEmpty?'[Intentionally empty]':'[No wording]'))+'</dd>').join('')+'</dl>':'<p class="help">Choose a level above to inspect its wording.</p>';
+  }
 }
 function newScenario() {
   if((state.draft.name||state.draft.notes||picksFromDraft().some(Boolean))&&!confirm('Clear the current draft and start another scenario? Saved scenarios will not be changed.')) return;
   state.draft=blankDraft(); markChanged(); renderBuilder(); $('build-heading').scrollIntoView({behavior:'smooth'});
 }
 function saveScenario() {
-  const picks=picksFromDraft(); if(picks.some(x=>!x)||designErrors().length) {notify('Complete every dimension before saving.',true);return;}
-  if(state.scenarios.length>=MAX_SCENARIOS) {notify('This workspace supports up to '+MAX_SCENARIOS+' saved scenarios. Export a backup and begin a new project.',true);return;}
-  const duplicate=findDuplicate();
-  if(duplicate&&!confirm('This combination is already saved as "'+duplicate.name+'". Save another copy?'))return;
-  let version=currentVersion();
-  if(!version) {version={id:uuid(),number:Math.max(0,...state.versions.map(v=>v.number))+1,createdAt:now(),design:clone(state.design)};state.versions.push(version);}
-  const scenario={id:uuid(),number:state.nextNumber,name:state.draft.name.trim()||'Scenario '+String(state.nextNumber).padStart(3,'0'),createdAt:now(),projectName:state.projectName.trim()||'Untitled project',versionId:version.id,picks:clone(picks),text:compose(version.design,picks),notes:state.draft.notes};
-  state.scenarios.push(scenario);state.nextNumber++;
-  // Retain level choices to support making a small change; clear only name/notes.
-  state.draft.name='';state.draft.notes='';
-  const ok=markChanged(true); renderBuilder();
-  notify(ok?'"'+scenario.name+'" saved in this browser. Change a level or select New scenario.':'Scenario added in this open tab only. Export project now.',!ok);
+  const picks=picksFromDraft();
+  if(picks.some(x=>!x)||designErrors().length||scriptAudit().errors.length){notify('Complete every dimension and resolve script issues before saving.',true);return;}
+  if(state.scenarios.length>=MAX_SCENARIOS){notify('This workspace supports up to '+MAX_SCENARIOS+' saved scenarios. Export a backup and begin a new project.',true);return;}
+  let text;try{text=compose(state.design,picks);}catch(err){notify(err.message,true);return;}
+  const duplicate=findDuplicate();if(duplicate&&!confirm('This combination is already saved as "'+duplicate.name+'". Save another copy?'))return;
+  let version=currentVersion();if(!version){version={id:uuid(),number:Math.max(0,...state.versions.map(v=>v.number))+1,createdAt:now(),design:clone(state.design)};state.versions.push(version);}
+  const scenario={id:uuid(),number:state.nextNumber,name:state.draft.name.trim()||'Scenario '+String(state.nextNumber).padStart(3,'0'),createdAt:now(),projectName:state.projectName.trim()||'Untitled project',versionId:version.id,picks:clone(picks),text,notes:state.draft.notes};
+  state.scenarios.push(scenario);state.nextNumber++;state.draft.name='';state.draft.notes='';
+  const ok=markChanged(true);renderBuilder();notify(ok?'"'+scenario.name+'" saved in this browser. Change a level to create another.':'Scenario added in this open tab only. Export project now.',!ok);
 }
 function renderSaved() {
-  const count=state.scenarios.length;
-  $('library').hidden=state.step==='setup'&&!count;
-  $('saved-count').textContent=count; $('nav-count').textContent=count;
-  $('export-csv').disabled=!count; $('export-txt').disabled=!count;
-  $('search-scenarios').hidden=!count; $('csv-note').hidden=!count;
-  const v=currentVersion(); const current=state.scenarios.filter(s=>s.versionId===v?.id);
-  const unique=new Set(current.map(s=>JSON.stringify(s.picks))).size;
-  $('coverage').textContent=state.step==='setup'?'All saved scenarios are preserved independently of your editable setup.':count?unique+' unique combination'+(unique===1?'':'s')+' saved for the current design / '+totalCombinations().toLocaleString()+' possible. Exports include all saved design versions.':'Save your first scenario to start your collection.';
+  const count=state.scenarios.length;$('library').hidden=state.step!=='build'&&!count;
+  $('saved-count').textContent=count;$('nav-count').textContent=count;
+  for(const id of ['export-csv','export-txt','export-html'])$(id).disabled=!count;
+  $('search-scenarios').hidden=!count;$('csv-note').hidden=!count;
+  const v=currentVersion(),current=state.scenarios.filter(s=>s.versionId===v?.id),unique=new Set(current.map(s=>JSON.stringify(s.picks))).size;
+  $('coverage').textContent=state.step!=='build'?'All saved scenarios are preserved independently of your editable setup and script.':count?unique+' unique combination'+(unique===1?'':'s')+' saved for the current design / '+totalCombinations().toLocaleString()+' possible. Exports include all saved design versions.':'Save your first scenario to start your collection.';
   const q=$('search-scenarios').value.trim().toLocaleLowerCase();
-  const filtered=state.scenarios.slice().reverse().filter(s=>{
-    if(!q)return true;
-    const design=versionFor(s).design;
-    const labels=design.dimensions.map((d,i)=>d.name+' '+d.levels.find(l=>l.id===s.picks[i]).name).join(' ');
-    return [s.name,s.text,s.notes,s.id,labels].join(' ').toLocaleLowerCase().includes(q);
-  });
-  if(!filtered.length) {$('saved-list').innerHTML='<div class="empty"><h3>'+(count?'No matching scenarios':'Your collection starts here')+'</h3><p>'+(count?'Try a different search. Exports still include every saved scenario.':'Choose your levels and save a scenario. Every combination you save will stay together in this project.')+'</p></div>';}
+  const filtered=state.scenarios.slice().reverse().filter(s=>{if(!q)return true;const d=versionFor(s).design;const labels=d.dimensions.map((dim,i)=>dim.name+' '+dim.levels.find(l=>l.id===s.picks[i]).name).join(' ');return [s.name,s.text,s.notes,s.id,labels].join(' ').toLocaleLowerCase().includes(q);});
+  if(!filtered.length)$('saved-list').innerHTML='<div class="empty"><h3>'+(count?'No matching scenarios':'Your collection starts here')+'</h3><p>'+(count?'Try a different search. Exports still include every saved scenario.':'Choose your levels and save a scenario. Every combination you save will stay together in this project.')+'</p></div>';
   else $('saved-list').innerHTML=filtered.slice(0,visibleLimit).map(s=>{
-    const version=versionFor(s), design=version.design;
+    const version=versionFor(s),design=version.design;
     const chips=design.dimensions.map((d,i)=>'<span class="saved-chip">'+esc(d.name)+': <strong>'+esc(d.levels.find(l=>l.id===s.picks[i]).name)+'</strong></span>').join('');
-    return `<article class="panel saved-card"><div class="saved-head"><div><h3 class="saved-title">${esc(s.name)}</h3><div class="saved-meta">#${String(s.number).padStart(3,'0')} &middot; Design v${version.number} &middot; <time datetime="${esc(s.createdAt)}">${esc(new Date(s.createdAt).toLocaleString())}</time></div></div><div class="actions saved-actions"><button class="btn small" data-action="copy-saved" data-id="${esc(s.id)}">Copy</button><button class="btn small" data-action="reuse-saved" data-id="${esc(s.id)}">Reuse</button><button class="btn small ghost danger" data-action="delete-saved" data-id="${esc(s.id)}" aria-label="Delete ${esc(s.name)}">Delete</button></div></div><div class="saved-chips">${chips}</div><details><summary>View scenario &amp; details</summary><div><p class="saved-text">${esc(s.text)}</p>${s.notes?'<p class="saved-notes"><strong>Research notes</strong>\n'+esc(s.notes)+'</p>':''}<div class="saved-id">${esc(conditionCode(design,s.picks))}<br>ID: ${esc(s.id)}</div></div></details></article>`;
+    return `<article class="panel saved-card"><div class="saved-head"><div><h3 class="saved-title">${esc(s.name)}</h3><div class="saved-meta">#${String(s.number).padStart(3,'0')} &middot; Design v${version.number} &middot; <time datetime="${esc(s.createdAt)}">${esc(new Date(s.createdAt).toLocaleString())}</time></div></div><div class="actions saved-actions"><button class="btn small" data-action="copy-saved" data-id="${esc(s.id)}">Copy</button><button class="btn small" data-action="reuse-saved" data-id="${esc(s.id)}">Reuse</button><button class="btn small ghost danger" data-action="delete-saved" data-id="${esc(s.id)}" aria-label="Delete ${esc(s.name)}">Delete</button></div></div><div class="saved-chips">${chips}</div><details><summary>View scenario &amp; details</summary><div><div class="script-document clean">${renderDocument(design,s.picks)}</div>${s.notes?'<p class="saved-notes"><strong>Research notes</strong>\n'+esc(s.notes)+'</p>':''}<div class="saved-id">${esc(conditionCode(design,s.picks))}<br>ID: ${esc(s.id)}</div></div></details></article>`;
   }).join('');
-  $('load-more').hidden=filtered.length<=visibleLimit;
-  $('load-more').textContent='Show more ('+Math.max(0,filtered.length-visibleLimit)+' remaining)';
+  $('load-more').hidden=filtered.length<=visibleLimit;$('load-more').textContent='Show more ('+Math.max(0,filtered.length-visibleLimit)+' remaining)';
 }
 function reuseScenario(s) {
   const version=versionFor(s), replaces=designSignature(state.design)!==designSignature(version.design);
@@ -342,19 +627,29 @@ function csvCell(value) {
 function exportCSV() {
   if(!state.scenarios.length)return;
   const maxDims=Math.max(...state.scenarios.map(s=>versionFor(s).design.dimensions.length));
-  const header=['scenario_id','scenario_number','scenario_name','created_at_utc','project_name','design_version','design_version_id','condition_code','scenario_text','research_notes','shared_introduction','shared_ending','paragraph_layout'];
-  for(let i=1;i<=maxDims;i++)for(const field of ['dimension_id','dimension_name','phrase_before','level_id','level_number','level_name','level_wording'])header.push('d'+i+'_'+field);
+  const fieldKeys=[...new Set(state.scenarios.flatMap(s=>{const d=versionFor(s).design;return d.mode==='master'?d.dimensions.flatMap(dim=>dim.slots.map(slot=>dim.key+'.'+slot.key)):[];}))];
+  const header=['scenario_id','scenario_number','scenario_name','created_at_utc','project_name','design_version','design_version_id','condition_code','scenario_text','research_notes','composition_mode','instruction_blocks_text','conversation_text','resolved_blocks_json','template_blocks_json','shared_introduction','shared_ending','paragraph_layout'];
+  for(let i=1;i<=maxDims;i++)for(const field of ['dimension_id','dimension_name','dimension_key','phrase_before','level_id','level_number','level_name','legacy_level_wording'])header.push('d'+i+'_'+field);
+  for(const key of fieldKeys)header.push('field:'+key);
   const rows=[header];
   for(const s of state.scenarios) {
-    const v=versionFor(s), d=v.design;
-    const row=[s.id,s.number,s.name,s.createdAt,s.projectName,v.number,v.id,conditionCode(d,s.picks),s.text,s.notes,d.intro,d.outro,d.layout];
+    const v=versionFor(s),d=v.design,blocks=d.mode==='master'?resolvedBlocks(d,s.picks):[];
+    const sectionText=type=>blocks.filter(b=>b.type===type).map(b=>type==='turn'?(b.title?b.title+': ':'')+b.text:[b.title,b.text].filter(x=>x!=='').join('\n')).join('\n\n');
+    const row=[s.id,s.number,s.name,s.createdAt,s.projectName,v.number,v.id,conditionCode(d,s.picks),s.text,s.notes,d.mode,d.mode==='master'?sectionText('text'):s.text,sectionText('turn'),JSON.stringify(blocks),JSON.stringify(d.blocks),d.intro,d.outro,d.layout];
+    const values=new Map();
     for(let i=0;i<maxDims;i++) {
-      if(i>=d.dimensions.length)row.push('','','','','','','');
-      else {const dim=d.dimensions[i], index=dim.levels.findIndex(l=>l.id===s.picks[i]),level=dim.levels[index];row.push(dim.id,dim.name,dim.prefix,level.id,index+1,level.name,levelWording(level));}
-    }rows.push(row);
+      if(i>=d.dimensions.length)row.push('','','','','','','','');
+      else {const dim=d.dimensions[i],index=dim.levels.findIndex(l=>l.id===s.picks[i]),level=dim.levels[index];row.push(dim.id,dim.name,dim.key,dim.prefix,level.id,index+1,level.name,d.mode==='simple'?levelWording(level):'');if(d.mode==='master')for(const slot of dim.slots)values.set(dim.key+'.'+slot.key,fieldValue(level,slot));}
+    }
+    for(const key of fieldKeys)row.push(values.get(key)||'');rows.push(row);
   }
-  download('\uFEFF'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')+'\r\n',filename('-scenarios.csv'),'text/csv');
-  notify('CSV prepared with all '+state.scenarios.length+' saved scenarios.');
+  download('\uFEFF'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')+'\r\n',filename('-scenarios.csv'),'text/csv');notify('CSV prepared with all '+state.scenarios.length+' saved scenarios and their wording fields.');
+}
+function exportHTML() {
+  if(!state.scenarios.length)return;
+  const css='body{margin:40px auto;padding:0 24px;max-width:900px;color:#1e293b;font:16px/1.8 Georgia,serif}h1,h2,.meta{font-family:Arial,sans-serif}h1{font-size:26px}h2{font-size:19px;margin-bottom:5px}.meta{font-size:12px;color:#586577;margin-bottom:24px}.scenario{margin:40px 0;padding-top:24px;border-top:1px solid #ccd3dd;break-before:page}.scenario:first-of-type{break-before:auto}.script-section+.script-section{margin-top:24px}.script-section-title{font:700 12px/1.6 Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px}.script-body,.dialogue-text{white-space:pre-wrap;overflow-wrap:anywhere}.dialogue-turn{display:grid;grid-template-columns:100px 1fr;gap:20px;padding:16px 0;border-top:1px solid #e0e3e8;break-inside:avoid}.dialogue-speaker{font:700 12px/1.6 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}.notes{font:13px/1.7 Arial,sans-serif;white-space:pre-wrap;margin-top:24px;color:#586577}@media(max-width:500px){body{padding:0 14px}.dialogue-turn{grid-template-columns:65px 1fr;gap:12px}}@media print{body{margin:0;max-width:none}.scenario{border-top:0}}';
+  const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+esc(state.projectName||'Factorial scenarios')+'</title><style>'+css+'</style></head><body><h1>'+esc(state.projectName||'Factorial scenarios')+'</h1><p class="meta">'+state.scenarios.length+' saved scenarios. Researcher export; review scenario names and metadata before participant use.</p>'+state.scenarios.map(s=>{const v=versionFor(s);return '<article class="scenario"><h2>'+esc(s.name)+'</h2><p class="meta">Design v'+v.number+' | '+esc(conditionCode(v.design,s.picks))+' | '+esc(s.id)+'</p>'+cleanDocument(v.design,s.picks)+(s.notes?'<div class="notes"><strong>Research notes</strong>\n'+esc(s.notes)+'</div>':'')+'</article>';}).join('')+'</body></html>';
+  download(html,filename('-scenarios.html'),'text/html');notify('HTML prepared with all '+state.scenarios.length+' saved scripts, without review highlights.');
 }
 function exportTXT() {
   if(!state.scenarios.length)return;
@@ -370,44 +665,66 @@ function exportTXT() {
 /* Import validation: construct known fields, validate references and composed text,
  * and never insert user-supplied HTML into the page unescaped.
  */
+/* Accept v1 and v2 backups, construct known fields, and verify immutable snapshots.
+ * Working drafts may be unfinished. Saved designs must render their saved text exactly.
+ */
 function validateProject(raw) {
   const fail=msg=>{throw Error(msg);};
   const obj=(x,label)=>{if(!x||typeof x!=='object'||Array.isArray(x))fail('Invalid '+label+'.');return x;};
   const str=(x,label,max=20000)=>{if(typeof x!=='string'||x.length>max)fail('Invalid '+label+'.');return x;};
   const id=(x,label)=>{str(x,label,100);if(!/^[A-Za-z0-9][A-Za-z0-9_-]*$/.test(x)||['constructor','prototype','__proto__'].includes(x))fail('Invalid '+label+'.');return x;};
+  const key=(x,label)=>{str(x,label,60);if(!/^[a-z][a-z0-9_]*$/.test(x))fail('Invalid '+label+'.');return x;};
   const num=(x,label,min=1,max=1000000000)=>{if(!Number.isSafeInteger(x)||x<min||x>max)fail('Invalid '+label+'.');return x;};
   const date=(x,label)=>{str(x,label,60);if(!Number.isFinite(Date.parse(x)))fail('Invalid '+label+'.');return x;};
   const arr=(x,label,min,max)=>{if(!Array.isArray(x)||x.length<min||x.length>max)fail('Invalid '+label+'.');return x;};
   const unique=(items,label)=>{if(new Set(items).size!==items.length)fail('Duplicate '+label+'.');};
+  obj(raw,'project');if(raw.format!==FORMAT||![1,2].includes(raw.schemaVersion))fail('This is not a supported Factorial project backup (version 1 or 2).');
+  const legacy=raw.schemaVersion===1;
   function design(value,ready=false) {
     obj(value,'design');
-    const result={intro:str(value.intro,'introduction'),outro:str(value.outro,'ending'),layout:str(value.layout,'layout',20),dimensions:arr(value.dimensions,'dimensions',1,MAX_DIMENSIONS).map(d=>{
-      obj(d,'dimension');return {id:id(d.id,'dimension ID'),name:str(d.name,'dimension name',200),prefix:str(d.prefix,'phrase'),levels:arr(d.levels,'levels',1,MAX_LEVELS).map(l=>{obj(l,'level');return {id:id(l.id,'level ID'),name:str(l.name,'level name',200),text:str(l.text,'level wording')};})};
-    })};
+    const result={intro:str(value.intro,'introduction'),outro:str(value.outro,'ending'),layout:str(value.layout,'layout',20),mode:legacy?'simple':str(value.mode,'composition mode',20),dimensions:[],blocks:[]};
     if(!['single','paragraphs'].includes(result.layout))fail('Unsupported paragraph layout.');
-    unique(result.dimensions.map(d=>d.id),'dimension IDs');
-    unique(result.dimensions.flatMap(d=>d.levels.map(l=>l.id)),'level IDs');
-    if(ready&&designErrors(result).length)fail('A saved design version has incomplete dimension or level names.');
+    if(!['simple','master'].includes(result.mode))fail('Unsupported composition mode.');
+    result.dimensions=arr(value.dimensions,'dimensions',1,MAX_DIMENSIONS).map((d,i)=>{
+      obj(d,'dimension');
+      const slots=legacy?[{id:'legacy-wording-'+(i+1),key:'wording',name:'Wording',allowEmpty:false}]:arr(d.slots,'wording fields',1,MAX_FIELDS).map(s=>{
+        obj(s,'wording field');const fieldKey=key(s.key,'field placeholder ID');if(fieldKey==='label')fail('"label" is reserved for the level name.');
+        if(typeof s.allowEmpty!=='boolean')fail('Invalid empty-wording setting.');return {id:id(s.id,'field ID'),key:fieldKey,name:str(s.name,'field name',200),allowEmpty:s.allowEmpty};
+      });
+      unique(slots.map(s=>s.id),'field IDs within a dimension');unique(slots.map(s=>s.key),'field placeholder IDs within a dimension');
+      const levels=arr(d.levels,'levels',1,MAX_LEVELS).map(l=>{
+        obj(l,'level');const level={id:id(l.id,'level ID'),name:str(l.name,'level name',200),text:str(l.text,'level wording'),values:{}};
+        if(legacy)level.values[slots[0].id]=levelWording(level);
+        else {obj(l.values,'field wording');for(const slot of slots)level.values[slot.id]=l.values[slot.id]===undefined?'':str(l.values[slot.id],'field wording');}
+        return level;
+      });
+      return {id:id(d.id,'dimension ID'),name:str(d.name,'dimension name',200),prefix:str(d.prefix,'phrase'),key:legacy?'dimension_'+(i+1):key(d.key,'dimension placeholder ID'),slots,levels};
+    });
+    if(!legacy)result.blocks=arr(value.blocks,'script blocks',0,MAX_BLOCKS).map(b=>{
+      obj(b,'script block');if(!['text','turn'].includes(b.type))fail('Invalid block type.');return {id:id(b.id,'block ID'),type:b.type,title:str(b.title,'block title',500),text:str(b.text,'block text')};
+    });
+    unique(result.dimensions.map(d=>d.id),'dimension IDs');unique(result.dimensions.map(d=>d.key),'dimension placeholder IDs');
+    unique(result.dimensions.flatMap(d=>d.levels.map(l=>l.id)),'level IDs');unique(result.dimensions.flatMap(d=>d.slots.map(s=>s.id)),'field IDs');unique(result.blocks.map(b=>b.id),'block IDs');
+    if(result.mode==='master'&&!result.blocks.length)fail('A master script needs at least one block.');
+    if(ready&&designErrors(result).length)fail('A saved design version has incomplete dimension, level, or field names.');
+    if(ready&&scriptAudit(result).errors.length)fail('A saved design version contains unresolved placeholders or missing wording.');
     return result;
   }
-  obj(raw,'project');if(raw.format!==FORMAT||raw.schemaVersion!==SCHEMA)fail('This is not a supported Factorial project backup (version 1).');
-  const result={format:FORMAT,schemaVersion:SCHEMA,projectId:id(raw.projectId,'project ID'),projectName:str(raw.projectName,'project name',200),createdAt:date(raw.createdAt,'creation date'),updatedAt:date(raw.updatedAt,'update date'),design:design(raw.design),versions:[],scenarios:[],draft:blankDraft(),nextNumber:1,step:raw.step==='build'?'build':'setup'};
+  const result={format:FORMAT,schemaVersion:SCHEMA,projectId:id(raw.projectId,'project ID'),projectName:str(raw.projectName,'project name',200),createdAt:date(raw.createdAt,'creation date'),updatedAt:date(raw.updatedAt,'update date'),design:design(raw.design),versions:[],scenarios:[],draft:blankDraft(),nextNumber:1,step:['setup','script','build'].includes(raw.step)?raw.step:'setup'};
   result.versions=arr(raw.versions,'design versions',0,MAX_SCENARIOS).map(v=>{obj(v,'version');return {id:id(v.id,'version ID'),number:num(v.number,'version number'),createdAt:date(v.createdAt,'version date'),design:design(v.design,true)};});
-  unique(result.versions.map(v=>v.id),'version IDs');unique(result.versions.map(v=>v.number),'version numbers');
-  const versions=new Map(result.versions.map(v=>[v.id,v]));
+  unique(result.versions.map(v=>v.id),'version IDs');unique(result.versions.map(v=>v.number),'version numbers');const versions=new Map(result.versions.map(v=>[v.id,v]));
   result.scenarios=arr(raw.scenarios,'scenarios',0,MAX_SCENARIOS).map(s=>{
     obj(s,'scenario');const v=versions.get(s.versionId);if(!v)fail('A scenario refers to a missing design version.');
     const picks=arr(s.picks,'saved level choices',v.design.dimensions.length,v.design.dimensions.length).map((p,i)=>{id(p,'chosen level');if(!v.design.dimensions[i].levels.some(l=>l.id===p))fail('A scenario refers to a missing level.');return p;});
-    const text=str(s.text,'scenario text',1500000);
-    if(text!==compose(v.design,picks))fail('Saved scenario text does not match its design and selections.');
+    const text=str(s.text,'scenario text',MAX_SCENARIO_CHARS);if(text!==compose(v.design,picks))fail('Saved scenario text does not match its design and selections.');
     return {id:id(s.id,'scenario ID'),number:num(s.number,'scenario number'),name:str(s.name,'scenario name',200),createdAt:date(s.createdAt,'scenario date'),projectName:str(s.projectName,'saved project name',200),versionId:v.id,picks,text,notes:str(s.notes,'research notes')};
   });
   unique(result.scenarios.map(s=>s.id),'scenario IDs');unique(result.scenarios.map(s=>s.number),'scenario numbers');
-  obj(raw.draft,'draft');obj(raw.draft.selections,'draft choices');
-  result.draft.name=str(raw.draft.name,'draft name',200);result.draft.notes=str(raw.draft.notes,'draft notes');
-  for(const d of result.design.dimensions) {const selected=raw.draft.selections[d.id];if(selected!==undefined) {if(!d.levels.some(l=>l.id===selected))fail('An unfinished draft refers to a missing level.');result.draft.selections[d.id]=selected;}}
+  obj(raw.draft,'draft');obj(raw.draft.selections,'draft choices');result.draft.name=str(raw.draft.name,'draft name',200);result.draft.notes=str(raw.draft.notes,'draft notes');
+  for(const d of result.design.dimensions){const selected=raw.draft.selections[d.id];if(selected!==undefined){if(!d.levels.some(l=>l.id===selected))fail('An unfinished draft refers to a missing level.');result.draft.selections[d.id]=selected;}}
   result.nextNumber=Math.max(num(raw.nextNumber,'next scenario number'),1,...result.scenarios.map(s=>s.number+1));
-  if(result.step==='build'&&designErrors(result.design).length)result.step='setup';
+  if(result.step!=='setup'&&designErrors(result.design).length)result.step='setup';
+  if(result.step==='build'&&scriptAudit(result.design).errors.length)result.step='script';
   return result;
 }
 async function importProject(file) {
@@ -426,13 +743,29 @@ async function importProject(file) {
   }catch(err){notify('Import rejected. Your current project was not changed. '+(err instanceof SyntaxError?'The file is not valid JSON.':err.message),true);}
 }
 function loadExample() {
-  if(!confirm('Replace the current setup and unfinished draft with a two-dimension example? All saved scenarios will be kept. This is illustrative wording, not content from your manuscript.'))return;
-  const d1=newDimension(),d2=newDimension();
-  d1.name='Response style';d1.prefix='The assistant responds';d1.levels[0].name='Warm';d1.levels[0].text='in a warm, conversational tone.';d1.levels[1].name='Formal';d1.levels[1].text='in a formal, factual tone.';
-  d2.name='Available support';d2.prefix='The assistant offers';d2.levels[0].name='Encouragement';d2.levels[0].text='words of encouragement.';d2.levels[1].name='Practical guidance';d2.levels[1].text='step-by-step practical guidance.';
-  state.design={intro:'Imagine you are interacting with a digital assistant.',outro:'',layout:'single',dimensions:[d1,d2]};
-  if(!state.projectName.trim())state.projectName='Assistant interaction - illustrative example';
-  state.draft=blankDraft();markChanged();showDesignErrors([]);renderSetup();notify('Illustrative 2 x 2 design loaded. All wording is editable.');
+  if(!confirm('Replace the current setup and unfinished draft with the 2 x 2 emotion example? Saved scenarios are kept. All wording is illustrative, not transcribed from your appendix or validated as a manipulation.'))return;
+  const human=newDimension(1),bot=newDimension(2);
+  human.name='Human emotion';human.key='human_emotion';bot.name='Chatbot emotion';bot.key='chatbot_emotion';
+  const configure=(d,fields,happy,sad)=>{
+    d.slots=fields.map(([key,name])=>({id:uuid(),key,name,allowEmpty:false}));
+    d.levels.forEach((l,i)=>{l.name=i===0?'Happy':'Sad';l.text='';l.values={};d.slots.forEach((s,j)=>l.values[s.id]=(i===0?happy:sad)[j]);});
+  };
+  configure(human,[['state','Emotional state'],['reason','Explanation'],['opening','Opening line'],['reply','Follow-up line']],
+    ['happy','they are pleased with how their recent test went',"I'm feeling happy today!","I'm looking forward to getting started."],
+    ['sad','they are disappointed with how their recent test went',"I'm feeling sad today.","I'm finding it hard to feel upbeat."]);
+  configure(bot,[['state','Expressed emotion'],['behavior','Behavioral cue'],['opening','Opening line'],['reply','Follow-up line']],
+    ['happy','its messages express enthusiasm and use upbeat punctuation',"I'm in a cheerful mood!","I'm feeling optimistic about this!"],
+    ['sad','its messages describe a low mood and use subdued phrasing',"I'm feeling a little sad today.","I'm not feeling very optimistic today."]);
+  state.design={intro:'',outro:'',layout:'single',mode:'master',dimensions:[human,bot],blocks:[
+    newBlock('text','Instructions',"Put yourself in the shoes of Alex, a 30-year-old graduate student. Today Alex is feeling {{human_emotion.state}} because {{human_emotion.reason}}. Alex turns to a chatbot for help planning their next study session.\n\nAs they interact, the chatbot seems {{chatbot_emotion.state}}: {{chatbot_emotion.behavior}}."),
+    newBlock('text','Conversation',''),
+    newBlock('turn','Human','{{human_emotion.opening}} Could you help me make a study plan for the next test?'),
+    newBlock('turn','Chatbot','{{chatbot_emotion.opening}} We can start by listing the topics you would like to review.'),
+    newBlock('turn','Human',"{{human_emotion.reply}} Let's start with the first topic."),
+    newBlock('turn','Chatbot','{{chatbot_emotion.reply}} We can break it into three small tasks.')
+  ]};
+  if(!state.projectName.trim())state.projectName='Human and chatbot emotion - illustrative example';
+  state.draft=blankDraft();lastScriptTarget=null;markChanged();showDesignErrors([]);renderSetup();renderSaved();notify('2 x 2 example loaded: 2 dimensions, 8 wording fields, 4 possible combinations.');
 }
 function newProject() {
   if(!confirm('Start a new project? This REPLACES the current setup and ALL saved scenarios in this browser. Export a project backup first to keep them.'))return;
@@ -442,47 +775,42 @@ function newProject() {
   const ok=markChanged(true);showDesignErrors([]);renderPage(true);notify(ok?'New project started.':'New project started in this tab only. Export a backup before closing.',!ok);
 }
 
-// Static controls.
-$('step-setup').onclick=()=>switchStep('setup');$('back-setup').onclick=()=>switchStep('setup');
-$('step-build').onclick=()=>switchStep('build');$('continue').onclick=()=>switchStep('build');
+// Controls. No external libraries or network requests are required.
+for(const step of ['setup','script','build'])$('step-'+step).onclick=()=>switchStep(step);
+$('back-setup').onclick=()=>switchStep('setup');$('back-script').onclick=()=>switchStep('script');
+$('continue').onclick=()=>switchStep('script');$('script-back').onclick=()=>switchStep('setup');
+for(const id of ['script-continue','script-build-bottom','skip-script'])$(id).onclick=()=>switchStep('build');
+$('convert-master').onclick=convertToMaster;
 $('apply-dimensions').onclick=applyDimensionCount;
-$('add-dimension').onclick=()=>{if(state.design.dimensions.length>=MAX_DIMENSIONS){notify('Maximum '+MAX_DIMENSIONS+' dimensions.',true);return;}state.design.dimensions.push(newDimension());markChanged();renderDimensions();updateStats();$('name-'+state.design.dimensions.at(-1).id).focus();};
+$('add-dimension').onclick=()=>{if(state.design.dimensions.length>=MAX_DIMENSIONS){notify('Maximum '+MAX_DIMENSIONS+' dimensions.',true);return;}state.design.dimensions.push(nextDimension());markChanged();renderDimensions();updateStats();$('name-'+state.design.dimensions.at(-1).id).focus();};
 $('load-example').onclick=loadExample;$('new-project').onclick=newProject;
 $('new-scenario').onclick=newScenario;$('save-scenario').onclick=saveScenario;
-$('copy-preview').onclick=()=>copyText(compose(state.design,picksFromDraft()));
-$('export-project').onclick=exportProject;$('export-csv').onclick=exportCSV;$('export-txt').onclick=exportTXT;
-$('import-project').onclick=()=>$('import-file').click();
-$('import-file').onchange=async e=>{await importProject(e.target.files[0]);e.target.value='';};
+$('copy-preview').onclick=()=>{try{copyText(compose(state.design,picksFromDraft()));}catch(err){notify(err.message,true);}};
+$('highlight-toggle').onchange=()=>{$('scenario-preview').className='script-document'+($('highlight-toggle').checked?'':' clean');};
+$('export-project').onclick=exportProject;$('export-csv').onclick=exportCSV;$('export-txt').onclick=exportTXT;$('export-html').onclick=exportHTML;
+$('import-project').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{await importProject(e.target.files[0]);e.target.value='';};
 $('open-help').onclick=()=>$('help-dialog').showModal();$('close-help').onclick=()=>$('help-dialog').close();
-$('search-scenarios').oninput=()=>{visibleLimit=30;renderSaved();};
-$('load-more').onclick=()=>{visibleLimit+=30;renderSaved();};
+$('search-scenarios').oninput=()=>{visibleLimit=30;renderSaved();};$('load-more').onclick=()=>{visibleLimit+=30;renderSaved();};
 $('project-name').oninput=e=>{state.projectName=e.target.value;markChanged();};
 for(const key of ['intro','outro','layout'])$(key).addEventListener(key==='layout'?'change':'input',e=>{state.design[key]=e.target.value;markChanged();});
-$('scenario-name').oninput=e=>{state.draft.name=e.target.value;markChanged();};
-$('scenario-notes').oninput=e=>{state.draft.notes=e.target.value;markChanged();};
-$('dimensions').addEventListener('input',e=>{
-  const {dim,level,field}=e.target.dataset;if(!dim||!field)return;
-  const d=state.design.dimensions.find(x=>x.id===dim);if(!d)return;
-  if(level){const l=d.levels.find(x=>x.id===level);if(l&&['name','text'].includes(field))l[field]=e.target.value;}
-  else if(['name','prefix'].includes(field)){d[field]=e.target.value;if(field==='name')$('title-'+d.id).textContent=d.name||'Untitled dimension';}
-  markChanged();if(!$('setup-errors').hidden)showDesignErrors([]);
-});
-$('dimensions').addEventListener('click',e=>{
-  const b=e.target.closest('button[data-action]');if(!b)return;
-  const {action,dim}=b.dataset, index=state.design.dimensions.findIndex(x=>x.id===dim);if(index<0)return;
-  if(action==='apply-levels'){applyLevelCount(dim);return;}
-  if(action==='remove-dim') {if(state.design.dimensions.length<=1)return;if(!confirm('Remove this dimension from the current setup? Saved scenarios keep their original design.'))return;state.design.dimensions.splice(index,1);}
-  if(action==='move-up'&&index>0)[state.design.dimensions[index-1],state.design.dimensions[index]]=[state.design.dimensions[index],state.design.dimensions[index-1]];
-  if(action==='move-down'&&index<state.design.dimensions.length-1)[state.design.dimensions[index],state.design.dimensions[index+1]]=[state.design.dimensions[index+1],state.design.dimensions[index]];
-  normalizePicks();markChanged();renderDimensions();updateStats();
-});
+$('scenario-name').oninput=e=>{state.draft.name=e.target.value;markChanged();};$('scenario-notes').oninput=e=>{state.draft.notes=e.target.value;markChanged();};
+$('dimensions').addEventListener('input',dimensionInput);$('dimensions').addEventListener('change',dimensionChanged);$('dimensions').addEventListener('click',dimensionClick);
+$('rename-confirm').onclick=confirmRename;$('rename-cancel').onclick=()=>{$('rename-dialog').close();renameTarget=null;};
+$('rename-value').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();confirmRename();}});
+$('add-text').onclick=()=>addBlock('text');$('add-turn').onclick=()=>addBlock('turn');
+$('script-blocks').addEventListener('input',scriptInput);$('script-blocks').addEventListener('click',blockClick);
+$('script-blocks').addEventListener('focusin',e=>{if(e.target.classList.contains('template-editor'))lastScriptTarget=e.target.id;});
+$('token-library').addEventListener('click',e=>{const b=e.target.closest('[data-insert-token]');if(b)insertToken(b.dataset.insertToken);});
 $('choices').addEventListener('change',e=>{if(e.target.type!=='radio')return;state.draft.selections[e.target.dataset.dim]=e.target.value;markChanged();updatePreview();});
 $('saved-list').addEventListener('click',e=>{
-  const b=e.target.closest('button[data-action]');if(!b)return;
-  const s=state.scenarios.find(x=>x.id===b.dataset.id);if(!s)return;
+  const b=e.target.closest('button[data-action]');if(!b)return;const s=state.scenarios.find(x=>x.id===b.dataset.id);if(!s)return;
   if(b.dataset.action==='copy-saved')copyText(s.text);
   if(b.dataset.action==='reuse-saved')reuseScenario(s);
-  if(b.dataset.action==='delete-saved') {if(!confirm('Delete "'+s.name+'" from this project? This cannot be undone here. A previously exported project backup is not changed.'))return;state.scenarios=state.scenarios.filter(x=>x.id!==s.id);const used=new Set(state.scenarios.map(x=>x.versionId));state.versions=state.versions.filter(v=>used.has(v.id));const ok=markChanged(true);renderSaved();updatePreview();notify(ok?'Scenario deleted.':'Scenario removed in this tab only. Export a backup to preserve this change.',!ok);}
+  if(b.dataset.action==='delete-saved'){
+    if(!confirm('Delete "'+s.name+'" from this project? This cannot be undone here. A previously exported project backup is not changed.'))return;
+    state.scenarios=state.scenarios.filter(x=>x.id!==s.id);const used=new Set(state.scenarios.map(x=>x.versionId));state.versions=state.versions.filter(v=>used.has(v.id));
+    const ok=markChanged(true);renderSaved();if(state.step==='build')updatePreview();notify(ok?'Scenario deleted.':'Scenario removed in this tab only. Export a backup to preserve this change.',!ok);
+  }
 });
 window.addEventListener('storage',e=>{if((e.key===STORAGE_KEY||e.key===null)&&e.newValue!==lastRaw){clearTimeout(persistTimer);persistTimer=0;persistenceLock='conflict';durable=false;showPersistenceIssue();}});
 window.addEventListener('beforeunload',e=>{if(persistTimer)persist();if(!durable&&dirtySinceBackup){e.preventDefault();e.returnValue='';}});
@@ -490,5 +818,4 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&persistTim
 loadStored();renderPage();
 })();
 </script>
-</body>
-</html>
+</body></html>
